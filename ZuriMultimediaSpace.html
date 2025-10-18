@@ -3,609 +3,483 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ZuriMultimediaSpace — Multimedia store & services</title>
+<title>ZuriMultimediaSpace (Firebase) — multimedia store</title>
 <meta name="description" content="ZuriMultimediaSpace: Upload, browse & download videos, reels, posters and order multimedia services."/>
-<link rel="icon" href="data:," />
-
 <style>
-  :root{
-    --bg:#0f1724;
-    --card:#0b1220;
-    --muted:#94a3b8;
-    --accent1: #6d28d9;
-    --accent2: #8b5cf6;
-    --glass: rgba(255,255,255,0.04);
-    --card-radius: 12px;
-  }
-
-  /* Basic reset */
-  *{box-sizing:border-box}
-  html,body,#app{height:100%}
-  body{
-    margin:0;
-    background: linear-gradient(180deg,#081124 0%, #071028 40%, #031027 100%);
-    color:#e6eef8;
-    font-family: Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.4;
-    padding:24px;
-  }
-
-  /* Container */
-  .site{
-    max-width:1200px;
-    margin:0 auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:16px;
-    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-    overflow:hidden;
-    display:grid;
-    grid-template-columns: 260px 1fr;
-    min-height:80vh;
-  }
-
-  /* Sidebar */
-  .sidebar{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding:20px;
-    border-right: 1px solid rgba(255,255,255,0.03);
-  }
-  .brand{
-    display:flex;gap:10px;align-items:center;margin-bottom:18px;
-  }
-  .logo{
-    width:46px;height:46px;border-radius:10px;
-    background: linear-gradient(135deg,var(--accent1),var(--accent2));
-    display:flex;align-items:center;justify-content:center;font-weight:700;
-    box-shadow: 0 6px 18px rgba(139,92,246,0.18);
-    font-size:18px;
-  }
-  .brand h1{font-size:16px;margin:0}
-  .brand p{margin:0;font-size:12px;color:var(--muted)}
-
-  .nav{margin-top:16px;display:flex;flex-direction:column;gap:8px}
-  .nav button{
-    background:transparent;border:0;padding:10px 12px;border-radius:10px;color:inherit;text-align:left;
-    cursor:pointer;font-weight:600;
-  }
-  .nav button.active{background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow: inset 0 1px 0 rgba(255,255,255,0.02)}
-  .section-title{font-size:12px;color:var(--muted);margin-top:20px;margin-bottom:8px}
-
-  select,input[type="search"]{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
-  .sidebar .small{font-size:12px;color:var(--muted)}
-
-  /* Main area */
-  .main{
-    padding:20px;
-  }
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .searchbar{display:flex;gap:10px;align-items:center}
-  .searchbar input{min-width:260px;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
-
-  .hero{
-    margin-top:18px;padding:18px;border-radius:14px;background:linear-gradient(90deg, rgba(109,40,217,0.12), rgba(139,92,246,0.06));
-    display:flex;align-items:center;justify-content:space-between;gap:12px;
-  }
-  .hero .left h2{margin:0;font-size:20px}
-  .hero .left p{margin:6px 0 0;color:var(--muted);font-size:13px}
-  .hero .actions{display:flex;gap:8px}
-  .btn{
-    padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
-    background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:white; box-shadow: 0 8px 24px rgba(99,102,241,0.12);
-  }
-  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
-
-  /* Grid */
-  .grid{display:grid;gap:14px}
-  .grid.media{grid-template-columns: repeat(auto-fill,minmax(220px,1fr));margin-top:14px}
-  .card{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:var(--card-radius);padding:8px;border:1px solid rgba(255,255,255,0.03);
-    display:flex;flex-direction:column;gap:8px;
-  }
-  .thumb{height:140px;border-radius:10px;overflow:hidden;background:#071225;display:flex;align-items:center;justify-content:center}
-  .thumb img, .thumb video{width:100%;height:100%;object-fit:cover;display:block}
-
-  .meta{display:flex;justify-content:space-between;align-items:center;padding:6px 2px}
-  .meta .title{font-weight:700;font-size:14px}
-  .meta .desc{font-size:12px;color:var(--muted)}
-
-  .card .actions{display:flex;gap:8px}
-  .card button{flex:1;padding:8px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
-  .card .download{background:rgba(255,255,255,0.03);color:#fff}
-  .card .add{background:linear-gradient(90deg,#0ea5a4,#06b6d4);color:#002;box-shadow:0 8px 18px rgba(6,182,212,0.08)}
-
-  /* Right column */
-  .right-col{margin-top:12px}
-  .panel{background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-  .orders-list .order{padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);margin-bottom:8px}
-
-  footer{padding:16px;text-align:center;color:var(--muted);font-size:13px;background:transparent}
-
-  /* Responsive */
+  /* --------- Simple mobile-first styling (improved responsiveness) --------- */
+  :root{ --bg:#041022; --panel:#07142a; --muted:#9fb0c8; --accent1:#6d28d9; --accent2:#8b5cf6; --glass: rgba(255,255,255,0.03); --card-radius:12px; }
+  *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Arial;color:#e8f0ff;background:linear-gradient(180deg,#021226 0%,#03132a 100%);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:18px auto;padding:12px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+  h1{font-size:1rem;margin:0}
+  .top-actions{display:flex;gap:8px}
+  .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:0;padding:10px 12px;border-radius:10px;color:#fff;font-weight:700;cursor:pointer}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:12px;margin-top:14px}
+  aside{background:var(--panel);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  nav button{display:block;width:100%;text-align:left;padding:10px;border-radius:8px;background:transparent;border:0;color:inherit;margin-bottom:6px;cursor:pointer}
+  nav button.active{background:rgba(255,255,255,0.02)}
+  .mobile-hamburger{display:none}
+  main{padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:10px}
+  .hero{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(139,92,246,0.08), rgba(109,40,217,0.06));}
+  .grid-media{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+  .card{background:var(--panel);padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;height:100%}
+  .thumb{height:160px;border-radius:8px;overflow:hidden;background:#020b12;display:flex;align-items:center;justify-content:center}
+  .thumb img,.thumb video{width:100%;height:100%;object-fit:cover}
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  .meta .title{font-weight:700}
+  .actions{display:flex;gap:8px;margin-top:10px}
+  .actions button{flex:1;padding:8px;border-radius:8px;border:0;cursor:pointer}
+  .download{background:rgba(255,255,255,0.03);color:#fff}
+  .add{background:linear-gradient(90deg,#06b6d4,#0ea5a4);color:#002}
+  .panel{background:var(--panel);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  .small{color:var(--muted);font-size:13px}
+  footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
+  /* responsive */
   @media (max-width:980px){
-    .site{grid-template-columns:1fr; padding-bottom:40px}
-    .sidebar{display:flex;flex-direction:row;gap:12px;overflow:auto;padding:12px}
-    .brand p{display:none}
-    .nav{flex-direction:row}
-    .sidebar .section-title{display:none}
+    .layout{grid-template-columns:1fr}
+    aside{display:flex;gap:8px;overflow:auto;padding:8px}
+    nav{display:flex;gap:8px}
+    .mobile-hamburger{display:block}
   }
 </style>
 </head>
 <body>
-<div id="app" class="site" aria-live="polite">
-  <!-- SIDEBAR -->
-  <aside class="sidebar" aria-label="Navigation">
+<div class="wrap" id="app">
+  <header>
     <div class="brand">
       <div class="logo">Z</div>
       <div>
         <h1>ZuriMultimediaSpace</h1>
-        <p>Download reels, videos & order services</p>
+        <div class="small">Upload & sell videos, reels, posters — powered by Firebase</div>
       </div>
     </div>
+    <div class="top-actions">
+      <button id="hamb" class="btn ghost mobile-hamburger">Menu</button>
+      <input id="search" type="search" placeholder="Search media..." style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
+      <button id="openUpload" class="btn">Publish</button>
+      <button id="openServices" class="btn ghost">Order Service</button>
+    </div>
+  </header>
 
-    <nav class="nav" id="nav">
-      <button class="active" data-view="explore">Explore</button>
-      <button data-view="upload">Upload</button>
-      <button data-view="services">Services</button>
-      <button data-view="orders">My Orders</button>
-    </nav>
+  <div class="layout">
+    <aside aria-label="left nav">
+      <nav id="nav">
+        <button data-view="explore" class="active">Explore</button>
+        <button data-view="upload">Upload</button>
+        <button data-view="services">Services</button>
+        <button data-view="orders">My Orders</button>
+      </nav>
 
-    <div class="section-title">Quick filters</div>
-    <div class="small">
-      <label for="category">Category</label>
-      <select id="category">
+      <div style="height:12px"></div>
+      <div class="small">Category</div>
+      <select id="category" style="width:100%;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);margin-top:6px">
         <option value="all">All</option>
         <option value="video">Videos</option>
         <option value="reel">Reels</option>
         <option value="poster">Posters</option>
         <option value="design">Designs</option>
       </select>
+
       <div style="height:12px"></div>
-      <div class="section-title">Cart</div>
+      <div class="small">Cart</div>
       <div id="cartSummary" class="small">Items: 0</div>
       <div style="height:8px"></div>
       <button id="checkoutBtn" class="btn ghost" style="width:100%">Checkout</button>
-    </div>
-  </aside>
 
-  <!-- MAIN -->
-  <main class="main" role="main">
-    <div class="topbar">
-      <div class="searchbar">
-        <input id="search" type="search" placeholder="Search videos, reels, posters..." aria-label="Search"/>
-        <button id="btnUpload" class="btn ghost">Upload New</button>
-      </div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <div class="small">Contact: <strong style="color:#fff">+256 779 185824</strong></div>
-        <div class="small">Email: <strong style="color:#fff">paddypride6@mail.com</strong></div>
-      </div>
-    </div>
+      <div style="height:12px"></div>
+      <div class="small">Contact</div>
+      <div class="small">WA: +256 779 185824</div>
+      <div class="small">Email: paddypride6@mail.com</div>
+    </aside>
 
-    <div class="hero" role="region" aria-label="Hero">
-      <div class="left">
-        <h2>ZuriMultimediaSpace</h2>
-        <p>Upload your videos, reels, posters and let people download or order bespoke multimedia services.</p>
-      </div>
-      <div class="actions">
-        <button id="openUpload" class="btn">Publish</button>
-        <button id="openServices" class="btn ghost">Order Service</button>
-      </div>
-    </div>
-
-    <!-- DYNAMIC CONTENT -->
-    <section id="viewArea" style="margin-top:18px;">
-      <!-- Explore by default -->
-      <div data-view="explore" class="view">
-        <h3 style="margin:0 0 10px 0">Explore the Gallery</h3>
-        <div id="mediaGrid" class="grid media" aria-live="polite"></div>
-        <div id="emptyHint" style="text-align:center;color:var(--muted);margin-top:20px;display:none">
-          No media yet — Upload using the Publish button.
-        </div>
-      </div>
-
-      <div data-view="upload" class="view" style="display:none">
-        <h3>Publish New Media</h3>
-        <div style="height:10px"></div>
-        <div class="panel">
-          <form id="uploadForm">
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <input name="title" placeholder="Title (optional)" required style="flex:1;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)"/>
-              <select name="type" required style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)">
-                <option value="video">Video</option>
-                <option value="reel">Reel</option>
-                <option value="poster">Poster</option>
-                <option value="design">Design</option>
-              </select>
+    <main>
+      <div id="viewArea">
+        <!-- HERO / EXPLORE -->
+        <section data-view="explore" class="view">
+          <div class="hero">
+            <div>
+              <h2 style="margin:0">Explore</h2>
+              <div class="small">Browse public media — videos, reels, posters and designs.</div>
             </div>
-            <div style="height:8px"></div>
-            <textarea name="description" rows="3" placeholder="Short description (optional)" style="width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)"></textarea>
-            <div style="height:8px"></div>
-            <input name="file" type="file" accept="image/*,video/*" required/>
-            <div style="height:8px"></div>
             <div style="display:flex;gap:8px">
-              <button type="submit" class="btn">Publish</button>
-              <button id="cancelUpload" type="button" class="btn ghost">Cancel</button>
+              <button id="btnRefresh" class="btn ghost">Refresh</button>
             </div>
-            <div id="uploadPreview" style="margin-top:10px"></div>
-          </form>
-        </div>
+          </div>
+
+          <div id="mediaGrid" class="grid-media" aria-live="polite"></div>
+          <div id="emptyHint" class="small" style="text-align:center;margin-top:12px;display:none;color:var(--muted)">No media yet — publish something.</div>
+        </section>
+
+        <!-- UPLOAD -->
+        <section data-view="upload" class="view" style="display:none">
+          <h3>Publish New Media</h3>
+          <div style="height:8px"></div>
+          <div class="panel">
+            <form id="uploadForm">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <input name="title" placeholder="Title (optional)" style="flex:1;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)" />
+                <select name="type" required style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);min-width:140px">
+                  <option value="video">Video</option>
+                  <option value="reel">Reel</option>
+                  <option value="poster">Poster</option>
+                  <option value="design">Design</option>
+                </select>
+              </div>
+              <div style="height:8px"></div>
+              <textarea name="description" rows="3" placeholder="Short description (optional)" style="width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)"></textarea>
+              <div style="height:8px"></div>
+              <input name="file" type="file" accept="image/*,video/*" required />
+              <div style="height:8px"></div>
+              <div class="small">Max file: 200MB recommended for demo (you can configure limits in the console).</div>
+              <div style="height:8px"></div>
+              <div style="display:flex;gap:8px">
+                <button type="submit" class="btn">Upload to Cloud</button>
+                <button id="cancelUpload" type="button" class="btn ghost">Cancel</button>
+              </div>
+
+              <div id="uploadProgress" style="margin-top:10px"></div>
+            </form>
+          </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section data-view="services" class="view" style="display:none">
+          <h3>Order a Service</h3>
+          <div style="height:8px"></div>
+          <div class="panel">
+            <form id="serviceForm">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <select name="service" required style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);min-width:200px">
+                  <option value="poster">Poster</option>
+                  <option value="banner">Banner</option>
+                  <option value="flyer">Flyer</option>
+                  <option value="animation">Animation</option>
+                  <option value="advert">Advert</option>
+                  <option value="videography">Videography</option>
+                  <option value="photography">Photography</option>
+                </select>
+                <input name="quantity" type="number" min="1" value="1" style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);width:120px">
+                <input name="deadline" type="date" style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)">
+              </div>
+              <div style="height:8px"></div>
+              <textarea name="details" rows="4" placeholder="Describe what you need (sizes, colors, text, references)" style="width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)"></textarea>
+              <div style="height:8px"></div>
+              <div style="display:flex;gap:8px">
+                <button type="submit" class="btn">Order via WhatsApp</button>
+                <button id="orderEmail" type="button" class="btn ghost">Order via Email</button>
+              </div>
+              <div style="height:8px"></div>
+              <div class="small" style="color:var(--muted)">Orders open WhatsApp to send to +256779185824 and also open email to paddypride6@mail.com.</div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ORDERS -->
+        <section data-view="orders" class="view" style="display:none">
+          <h3>Your Orders</h3>
+          <div style="height:8px"></div>
+          <div id="ordersArea" class="panel">
+            <!-- orders listed here -->
+          </div>
+        </section>
       </div>
 
-      <div data-view="services" class="view" style="display:none">
-        <h3>Order a Service</h3>
-        <div style="height:10px"></div>
-        <div class="panel">
-          <form id="serviceForm">
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <select name="service" required style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);min-width:200px">
-                <option value="poster">Poster</option>
-                <option value="banner">Banner</option>
-                <option value="flyer">Flyer</option>
-                <option value="animation">Animation</option>
-                <option value="advert">Advert</option>
-                <option value="videography">Videography</option>
-                <option value="photography">Photography</option>
-              </select>
-              <input name="quantity" type="number" min="1" value="1" style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);width:120px">
-              <input name="deadline" type="date" style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)">
-            </div>
-            <div style="height:8px"></div>
-            <textarea name="details" rows="4" placeholder="Describe what you need (sizes, colors, text, references)" style="width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)"></textarea>
-            <div style="height:8px"></div>
-            <div style="display:flex;gap:8px">
-              <button type="submit" class="btn">Order via WhatsApp</button>
-              <button id="orderEmail" type="button" class="btn ghost">Order via Email</button>
-            </div>
-            <div style="height:8px"></div>
-            <div class="small" style="color:var(--muted)">Orders will open WhatsApp to send your request to our number +256 779 185824. Email will open your default email client addressed to paddypride6@mail.com.</div>
-          </form>
-        </div>
-      </div>
-
-      <div data-view="orders" class="view" style="display:none">
-        <h3>Your Orders</h3>
-        <div style="height:10px"></div>
-        <div id="ordersArea" class="orders-list panel">
-          <!-- orders inserted here -->
-        </div>
-      </div>
-
-    </section>
-
-    <footer>
-      ZuriMultimediaSpace — built with HTML, CSS & JavaScript • Local demo (stores uploads in browser)
-    </footer>
-  </main>
+      <footer>
+        ZuriMultimediaSpace — powered by Firebase (Storage + Firestore). Uploads are stored in the cloud and served to visitors.
+      </footer>
+    </main>
+  </div>
 </div>
 
-<script>
-/* ===== ZuriMultimediaSpace — client-side single-file implementation =====
-   - Saves media and orders in localStorage
-   - Uploads: stored as data URLs (suitable for demo). For production use cloud storage (S3/Cloudinary).
-   - Orders: opens WhatsApp link and mailto as requested.
-*/
+<!-- ============================
+     Firebase SDKs (CDN, compat mode)
+     Replace versions if needed.
+     Docs: https://firebase.google.com/docs/web/setup#add-sdks-initialize
+     ============================ -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
-// Config: contact and email
-const CONTACT_WA = '256779185824';         // WhatsApp number (without plus, country code first)
+<script>
+/* ========= CONFIGURATION - REPLACE WITH YOUR FIREBASE CONFIG =========
+  1) Create a Firebase project: https://console.firebase.google.com/
+  2) Add a Web App and copy the firebaseConfig object into the block below.
+  3) In the console enable: Authentication (Anonymous), Firestore, Storage.
+  4) Set Storage rules to allow read (or secure as you require) for public gallery.
+     See docs: https://firebase.google.com/docs/storage/web/upload-files
+*/
+const firebaseConfig = {
+  apiKey: "REPLACE_ME",
+  authDomain: "REPLACE_ME.firebaseapp.com",
+  projectId: "REPLACE_ME",
+  storageBucket: "REPLACE_ME.appspot.com",
+  messagingSenderId: "REPLACE_ME",
+  appId: "REPLACE_ME"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const storage = firebase.storage();
+const db = firebase.firestore();
+
+/* --------- Sign in anonymously (creates a user for safe writes) --------- */
+auth.signInAnonymously().catch(err => {
+  console.error('Auth error', err);
+});
+
+/* ========== Application logic ========== */
+const CONTACT_WA = '256779185824';
 const CONTACT_EMAIL = 'paddypride6@mail.com';
 
-// Utilities
-const q = (sel, root=document) => root.querySelector(sel);
-const qq = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-const nowISO = () => new Date().toISOString();
+const nav = document.getElementById('nav');
+const views = document.querySelectorAll('[data-view]');
+const mediaGrid = document.getElementById('mediaGrid');
+const emptyHint = document.getElementById('emptyHint');
+const cartSummary = document.getElementById('cartSummary');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const searchInput = document.getElementById('search');
+const categorySelect = document.getElementById('category');
+const uploadForm = document.getElementById('uploadForm');
+const uploadProgress = document.getElementById('uploadProgress');
+const ordersArea = document.getElementById('ordersArea');
 
-// State
-let library = JSON.parse(localStorage.getItem('zuri_library') || '[]');
-let orders = JSON.parse(localStorage.getItem('zuri_orders') || '[]');
 let cart = JSON.parse(localStorage.getItem('zuri_cart') || '[]');
+let orders = JSON.parse(localStorage.getItem('zuri_orders') || '[]');
 
-const nav = q('#nav');
-const views = qq('[data-view]');
-const mediaGrid = q('#mediaGrid');
-const emptyHint = q('#emptyHint');
-const cartSummary = q('#cartSummary');
-const checkoutBtn = q('#checkoutBtn');
-const searchInput = q('#search');
-const categorySelect = q('#category');
-
-// Navigation
-nav.addEventListener('click', (ev) => {
-  if (ev.target.tagName === 'BUTTON') {
-    qq('#nav button').forEach(b=>b.classList.remove('active'));
+/* Navigation */
+nav.addEventListener('click', ev => {
+  if (ev.target.matches('button')) {
+    [...nav.querySelectorAll('button')].forEach(b => b.classList.remove('active'));
     ev.target.classList.add('active');
     showView(ev.target.dataset.view);
   }
 });
-
-function showView(name) {
-  views.forEach(v => {
-    if (v.dataset.view === name) v.style.display = '';
-    else v.style.display = 'none';
-  });
+function showView(name){
+  views.forEach(v => v.dataset.view === name ? v.style.display = '' : v.style.display = 'none');
 }
-
-// Load initial view
 showView('explore');
 
-// Search & filter
-searchInput.addEventListener('input', renderLibrary);
-categorySelect.addEventListener('change', renderLibrary);
+/* Search & filters */
+searchInput.addEventListener('input', renderFromFirestore);
+categorySelect.addEventListener('change', renderFromFirestore);
 
-// Upload open buttons
-q('#btnUpload').addEventListener('click', () => { activateNav('upload'); });
-q('#openUpload').addEventListener('click', () => { activateNav('upload'); });
-q('#openServices').addEventListener('click', () => { activateNav('services'); });
-
-function activateNav(viewName){
-  qq('#nav button').forEach(b => {
-    b.classList.toggle('active', b.dataset.view === viewName);
-  });
-  showView(viewName);
-}
-
-/* ----- Upload logic ----- */
-const uploadForm = q('#uploadForm');
-const uploadPreview = q('#uploadPreview');
-const cancelUpload = q('#cancelUpload');
-
-let pendingFileDataURL = null;
-
-uploadForm.file.addEventListener('change', async (ev) => {
-  const f = ev.target.files[0];
-  if (!f) { uploadPreview.innerHTML = ''; pendingFileDataURL = null; return; }
-  // validate size: allow up to 60MB demo (adjust as needed)
-  const maxBytes = 60 * 1024 * 1024;
-  if (f.size > maxBytes) {
-    alert('File too large for demo (max 60MB). Please use a smaller file.');
-    ev.target.value = '';
-    return;
-  }
-  // preview and read data URL
-  const reader = new FileReader();
-  reader.onload = () => {
-    pendingFileDataURL = reader.result;
-    showUploadPreview(f, reader.result);
-  };
-  if (f.type.startsWith('image/') || f.type.startsWith('video/')) {
-    reader.readAsDataURL(f);
-  } else {
-    alert('Unsupported file type. Please upload image or video.');
-    ev.target.value = '';
-  }
+/* Open upload/services */
+document.getElementById('openUpload').addEventListener('click', () => {
+  [...nav.querySelectorAll('button')].forEach(b => b.classList.toggle('active', b.dataset.view === 'upload'));
+  showView('upload');
+});
+document.getElementById('openServices').addEventListener('click', () => {
+  [...nav.querySelectorAll('button')].forEach(b => b.classList.toggle('active', b.dataset.view === 'services'));
+  showView('services');
 });
 
-function showUploadPreview(file, dataUrl) {
-  uploadPreview.innerHTML = '';
-  const container = document.createElement('div');
-  container.style.display = 'flex';
-  container.style.gap = '10px';
-  container.style.alignItems = 'center';
-  container.style.marginTop = '8px';
-  const thumb = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
-  thumb.src = dataUrl;
-  if (file.type.startsWith('video/')) thumb.controls = true;
-  thumb.style.maxWidth = '160px';
-  thumb.style.borderRadius = '8px';
-  container.appendChild(thumb);
-  const info = document.createElement('div');
-  info.innerHTML = `<div style="font-weight:700">${file.name}</div>
-                    <div style="color:var(--muted);font-size:13px">${(file.size/1024|0)} KB • ${file.type}</div>`;
-  container.appendChild(info);
-  uploadPreview.appendChild(container);
-}
-
-cancelUpload.addEventListener('click', () => {
+/* Cancel upload */
+document.getElementById('cancelUpload').addEventListener('click', () => {
   uploadForm.reset();
-  uploadPreview.innerHTML = '';
-  pendingFileDataURL = null;
-  activateNav('explore');
+  uploadProgress.innerHTML = '';
+  [...nav.querySelectorAll('button')].forEach(b => b.classList.toggle('active', b.dataset.view === 'explore'));
+  showView('explore');
 });
 
-// On publish
+/* Upload to Firebase Storage & save metadata to Firestore */
 uploadForm.addEventListener('submit', async (ev) => {
   ev.preventDefault();
-  const title = uploadForm.title.value.trim() || (uploadForm.file.files[0] && uploadForm.file.files[0].name) || 'Untitled';
+  const title = uploadForm.title.value.trim() || 'Untitled';
   const description = uploadForm.description.value.trim();
   const type = uploadForm.type.value;
-  const f = uploadForm.file.files[0];
-  if (!f || !pendingFileDataURL) return alert('Please select a valid image or video file.');
+  const file = uploadForm.file.files[0];
+  if (!file) return alert('Choose a file.');
 
-  // Build item
-  const item = {
-    id: 'm_' + Date.now(),
-    title, description, type,
-    filename: f.name,
-    mime: f.type,
-    size: f.size,
-    data: pendingFileDataURL,
-    createdAt: nowISO(),
-    price: (type === 'poster' || type === 'design') ? 3 : 5
-  };
-  library.unshift(item);
-  persistLibrary();
-  uploadForm.reset();
-  uploadPreview.innerHTML = '';
-  pendingFileDataURL = null;
-  activateNav('explore');
-  renderLibrary();
+  // file size check (optional)
+  const maxBytes = 200 * 1024 * 1024; // 200 MB
+  if (file.size > maxBytes) return alert('File too large (max 200MB). Use smaller file.');
+
+  // Storage path: media/<timestamp>_<filename>
+  const path = `media/${Date.now()}_${sanitizeFilename(file.name)}`;
+  const ref = storage.ref().child(path);
+  const uploadTask = ref.put(file);
+
+  uploadProgress.innerHTML = `<div class="small">Uploading ${file.name} ...</div>`;
+
+  uploadTask.on('state_changed',
+    (snapshot) => {
+      const pct = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      uploadProgress.innerHTML = `<div class="small">Upload: ${pct}%</div>`;
+    },
+    (err) => {
+      console.error(err);
+      uploadProgress.innerHTML = `<div class="small" style="color:#ffb3b3">Upload error: ${err.message}</div>`;
+    },
+    async () => {
+      // Completed - get public download URL
+      const downloadURL = await ref.getDownloadURL();
+      // Save metadata to Firestore
+      const doc = {
+        title, description, type, path, downloadURL,
+        filename: file.name, mime: file.type, size: file.size,
+        price: (type === 'poster' || type === 'design') ? 3 : 5,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+      await db.collection('media').add(doc);
+      uploadProgress.innerHTML = `<div class="small" style="color:#b8ffda">Uploaded successfully.</div>`;
+      uploadForm.reset();
+      renderFromFirestore();
+      // Jump to explore
+      [...nav.querySelectorAll('button')].forEach(b => b.classList.toggle('active', b.dataset.view === 'explore'));
+      showView('explore');
+    }
+  );
 });
 
-/* ----- Library rendering ----- */
-function persistLibrary(){ localStorage.setItem('zuri_library', JSON.stringify(library)); }
-function persistOrders(){ localStorage.setItem('zuri_orders', JSON.stringify(orders)); }
-function persistCart(){ localStorage.setItem('zuri_cart', JSON.stringify(cart)); updateCartUI(); }
-
-function renderLibrary(){
-  mediaGrid.innerHTML = '';
+/* Render gallery by reading Firestore 'media' collection */
+let lastListener = null;
+function renderFromFirestore(){
+  // unsubscribe previous listener if any (for real-time updates)
+  if (lastListener) lastListener();
   const qtext = searchInput.value.trim().toLowerCase();
   const cat = categorySelect.value;
-  let visible = library.filter(it => (cat === 'all' ? true : it.type === cat));
-  if (qtext) visible = visible.filter(it => (it.title + ' ' + (it.description||'')).toLowerCase().includes(qtext));
-  if (visible.length === 0){
-    emptyHint.style.display = '';
-  } else {
-    emptyHint.style.display = 'none';
-  }
 
-  visible.forEach(item => {
+  // Query: order by createdAt desc
+  let queryRef = db.collection('media').orderBy('createdAt','desc').limit(200);
+  // Real-time snapshot (keeps gallery updated for everyone)
+  lastListener = queryRef.onSnapshot(snapshot => {
+    const docs = [];
+    snapshot.forEach(doc => {
+      docs.push({ id: doc.id, ...doc.data() });
+    });
+    // client-side filter for search/category (simple)
+    let visible = docs;
+    if (cat !== 'all') visible = visible.filter(d => d.type === cat);
+    if (qtext) visible = visible.filter(d => ((d.title||'') + ' ' + (d.description||'')).toLowerCase().includes(qtext));
+    renderGallery(visible);
+  }, err => {
+    console.error('Firestore snapshot error', err);
+  });
+}
+
+/* Render gallery UI */
+function renderGallery(items){
+  mediaGrid.innerHTML = '';
+  if (!items || items.length === 0) { emptyHint.style.display = ''; return; }
+  emptyHint.style.display = 'none';
+  items.forEach(item => {
     const card = document.createElement('div'); card.className = 'card';
     const thumb = document.createElement('div'); thumb.className = 'thumb';
-    if (item.mime && item.mime.startsWith('video/')) {
-      const v = document.createElement('video'); v.src = item.data; v.controls = true; v.preload = 'metadata';
-      thumb.appendChild(v);
+    if (item.mime && item.mime.startsWith('video')) {
+      const v = document.createElement('video'); v.src = item.downloadURL; v.controls = true; thumb.appendChild(v);
     } else {
-      const img = document.createElement('img'); img.src = item.data; img.alt = item.title;
-      thumb.appendChild(img);
+      const img = document.createElement('img'); img.src = item.downloadURL; img.alt = item.title || 'media'; thumb.appendChild(img);
     }
     card.appendChild(thumb);
 
-    const meta = document.createElement('div'); meta.className='meta';
-    const left = document.createElement('div');
-    left.innerHTML = `<div class="title">${escapeHtml(item.title)}</div>
-                      <div class="desc">${escapeHtml(item.description || item.type)}</div>`;
-    meta.appendChild(left);
-    const right = document.createElement('div');
-    right.innerHTML = `<div style="font-weight:700">$${item.price}</div>`;
-    meta.appendChild(right);
+    const meta = document.createElement('div'); meta.className = 'meta';
+    const left = document.createElement('div'); left.innerHTML = `<div class="title">${escapeHtml(item.title||item.filename||'Untitled')}</div><div class="small" style="color:var(--muted)">${escapeHtml(item.description||item.type)}</div>`;
+    const right = document.createElement('div'); right.innerHTML = `<div style="font-weight:800">$${item.price||5}</div>`;
+    meta.appendChild(left); meta.appendChild(right);
     card.appendChild(meta);
 
-    const act = document.createElement('div'); act.className='actions';
-    const dl = document.createElement('button'); dl.className='download'; dl.textContent='Download';
-    dl.addEventListener('click', () => downloadDataURL(item));
-    const add = document.createElement('button'); add.className='add'; add.textContent='Add to Cart';
-    add.addEventListener('click', () => {
-      cart.push(item); persistCart();
-      alert('Added to cart. Open checkout to pay & download.');
-    });
-    act.appendChild(dl); act.appendChild(add);
-    card.appendChild(act);
+    const actions = document.createElement('div'); actions.className = 'actions';
+    const dl = document.createElement('button'); dl.className = 'download'; dl.textContent = 'Download';
+    dl.addEventListener('click', () => downloadURL(item.downloadURL, item.filename || item.title || 'file'));
+    const add = document.createElement('button'); add.className = 'add'; add.textContent = 'Add to Cart';
+    add.addEventListener('click', () => { addToCart(item); });
+    actions.appendChild(dl); actions.appendChild(add);
+    card.appendChild(actions);
 
     mediaGrid.appendChild(card);
   });
 }
 
-function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+/* Cart */
+function addToCart(item){
+  cart.push(item);
+  localStorage.setItem('zuri_cart', JSON.stringify(cart));
+  updateCartUI();
+  alert('Added to cart.');
+}
+function updateCartUI(){ cartSummary.textContent = `Items: ${cart.length}`; }
 
-/* ----- Download utility ----- */
-function downloadDataURL(item){
-  // convert data URL to blob and download
-  try {
-    const a = document.createElement('a');
-    a.href = item.data;
-    a.download = item.filename || (item.title || 'file');
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  } catch(e){
-    alert('Download failed: ' + e.message);
-  }
+/* Download helper (opens file in new tab or triggers save) */
+function downloadURL(url, filename){
+  // open in new tab — user can save
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 
-/* ----- Orders (WhatsApp + email) ----- */
-const serviceForm = q('#serviceForm');
-const orderEmailBtn = q('#orderEmail');
-const ordersArea = q('#ordersArea');
+/* Checkout (mock) */
+checkoutBtn.addEventListener('click', () => {
+  if (cart.length === 0) return alert('Cart empty.');
+  const total = cart.reduce((s,i)=>s + (i.price||5), 0);
+  if (!confirm(`Pay $${total} for ${cart.length} item(s)? (Demo — no real payment)`)) return;
+  alert('Simulated payment succeeded. Downloading items...');
+  setTimeout(() => {
+    cart.forEach(i => downloadURL(i.downloadURL, i.filename || i.title || 'file'));
+    cart = []; localStorage.setItem('zuri_cart', JSON.stringify(cart)); updateCartUI();
+  }, 600);
+});
+
+/* Orders: WhatsApp + Email as before */
+const serviceForm = document.getElementById('serviceForm');
+const orderEmailBtn = document.getElementById('orderEmail');
 
 serviceForm.addEventListener('submit', (ev) => {
   ev.preventDefault();
-  const form = new FormData(serviceForm);
-  const service = form.get('service');
-  const quantity = form.get('quantity') || 1;
-  const deadline = form.get('deadline') || 'ASAP';
-  const details = form.get('details') || '';
-  const order = {
-    id: 'o_' + Date.now(),
-    service, quantity, deadline, details,
-    createdAt: nowISO()
-  };
-  // Save locally for record
-  orders.unshift(order);
-  persistOrders();
-  renderOrders();
+  const fd = new FormData(serviceForm);
+  const service = fd.get('service'), quantity = fd.get('quantity')||1, deadline = fd.get('deadline')||'ASAP', details = fd.get('details')||'';
+  const order = { id: 'o_'+Date.now(), service, quantity, deadline, details, createdAt: new Date().toISOString() };
+  // save local list
+  orders.unshift(order); localStorage.setItem('zuri_orders', JSON.stringify(orders)); renderOrders();
 
-  // Build message for WhatsApp
-  const message = encodeURIComponent(
-    `Hello ZuriMultimediaSpace!\nI want to order: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails: ${details}\n\nPlease contact me to proceed.`
-  );
-  // Open WhatsApp chat via wa.me (opens web or app)
-  const waUrl = `https://wa.me/${CONTACT_WA}?text=${message}`;
-  window.open(waUrl, '_blank');
-
-  // Also open mailto fallback in separate tab so user can choose
-  const subject = encodeURIComponent(`Order: ${service} — ZuriMultimediaSpace`);
-  const body = encodeURIComponent(`Hello,\n\nI would like to place an order:\n\nService: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails: ${details}\n\nRegards,\n`);
-  const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  // open mailto in new tab if possible (some browsers block it)
-  window.location.href = mailto;
+  const message = encodeURIComponent(`Hello ZuriMultimediaSpace!\nI want to order: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails: ${details}`);
+  const wa = `https://wa.me/${CONTACT_WA}?text=${message}`;
+  // open WhatsApp in new tab
+  window.open(wa,'_blank');
+  // open mail client as fallback
+  const subj = encodeURIComponent(`Order: ${service} — ZuriMultimediaSpace`);
+  const body = encodeURIComponent(`Service: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails:\n${details}\n\nRegards,\n`);
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subj}&body=${body}`;
 });
 
 orderEmailBtn.addEventListener('click', () => {
-  const form = new FormData(serviceForm);
-  const service = form.get('service') || '';
-  const quantity = form.get('quantity') || 1;
-  const deadline = form.get('deadline') || 'ASAP';
-  const details = form.get('details') || '';
-  const subject = encodeURIComponent(`Order: ${service} — ZuriMultimediaSpace`);
-  const body = encodeURIComponent(`Hello,\n\nI would like to place an order:\n\nService: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails: ${details}\n\nRegards,\n`);
-  const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  window.location.href = mailto;
+  const fd = new FormData(serviceForm);
+  const service = fd.get('service')||'', quantity = fd.get('quantity')||1, deadline = fd.get('deadline')||'ASAP', details = fd.get('details')||'';
+  const subj = encodeURIComponent(`Order: ${service} — ZuriMultimediaSpace`);
+  const body = encodeURIComponent(`Service: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails:\n${details}\n\nRegards,\n`);
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subj}&body=${body}`;
 });
 
-/* ----- Orders area render ----- */
+/* Render orders saved locally */
 function renderOrders(){
   ordersArea.innerHTML = '';
-  if (orders.length === 0) {
-    ordersArea.innerHTML = '<div style="color:var(--muted)">No orders yet. Create one using Services.</div>';
-    return;
-  }
+  if (!orders || orders.length === 0) { ordersArea.innerHTML = `<div class="small" style="color:var(--muted)">No orders yet.</div>`; return; }
   orders.forEach(o => {
-    const el = document.createElement('div'); el.className='order';
+    const el = document.createElement('div'); el.style.padding='8px'; el.style.marginBottom='8px'; el.style.borderRadius='8px'; el.style.background='rgba(255,255,255,0.01)';
     el.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <div style="font-weight:800">${escapeHtml(o.service)} <span style="font-weight:600;color:var(--muted);font-size:13px">x${o.quantity}</span></div>
-        <div style="color:var(--muted);font-size:13px">${escapeHtml(o.details || '—')}</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:12px;color:var(--muted)">${new Date(o.createdAt).toLocaleString()}</div>
-        <div style="font-weight:700;margin-top:6px">Deadline: ${o.deadline}</div>
-      </div>
+      <div><div style="font-weight:800">${escapeHtml(o.service)}</div><div class="small" style="color:var(--muted)">${escapeHtml(o.details||'—')}</div></div>
+      <div style="text-align:right"><div class="small" style="color:var(--muted)">${new Date(o.createdAt).toLocaleString()}</div><div style="font-weight:700">Qty: ${o.quantity}</div></div>
     </div>`;
     ordersArea.appendChild(el);
   });
 }
 
-/* ----- Cart & Checkout (mock) ----- */
-checkoutBtn.addEventListener('click', () => {
-  if (cart.length === 0) return alert('Cart is empty.');
-  // Show simple confirm and perform simulated payment + start downloads
-  const total = cart.reduce((s,i)=>s+(i.price||5),0);
-  if (!confirm(`Pay $${total} for ${cart.length} item(s)? (Demo — no real payment)`)) return;
-  alert('Payment simulated. Preparing downloads...');
-  // Download all items
-  setTimeout(() => {
-    cart.forEach(i => downloadDataURL(i));
-    cart = []; persistCart();
-    alert('Downloads attempted. Thank you for using ZuriMultimediaSpace!');
-  }, 600);
-});
+/* Utilities */
+function escapeHtml(s){ if (!s) return ''; return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function sanitizeFilename(name){ return name.replace(/[^a-zA-Z0-9_.\-]/g,'_'); }
 
-function updateCartUI(){
-  cartSummary.textContent = `Items: ${cart.length}`;
-  persistCart();
-}
-updateCartUI();
+/* Initial load */
+renderFromFirestore(); renderOrders(); updateCartUI();
 
-/* ----- Init render ----- */
-renderLibrary();
-renderOrders();
-
-/* ----- Helper: export library to json (dev) ----- */
-window.Zuri = {
-  exportLibrary: () => JSON.stringify(library),
-  importLibrary: (json) => { library = JSON.parse(json || '[]'); persistLibrary(); renderLibrary(); }
-};
+/* Optional: Refresh button */
+document.getElementById('btnRefresh').addEventListener('click', renderFromFirestore);
 
 /* End of script */
 </script>
