@@ -212,7 +212,6 @@
   4) Set Storage rules to allow read (or secure as you require) for public gallery.
      See docs: https://firebase.google.com/docs/storage/web/upload-files
 */
-  <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
@@ -222,32 +221,18 @@
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
-    apiKey: "AIzaSyDFdrUdlitnbW_6Ik1LCBoV6XhmC08dW2U",
-    authDomain: "webapp-ce140.firebaseapp.com",
-    projectId: "webapp-ce140",
-    storageBucket: "webapp-ce140.firebasestorage.app",
-    messagingSenderId: "961040055615",
-    appId: "1:961040055615:web:85575ed43cd3971a29a78a",
-    measurementId: "G-1LE0WRQJFG"
+    apiKey: "AIzaSyDMpfyQmi0EMADsNReBQTv65DnXk3Nerlk",
+    authDomain: "zurimultimediaspace.firebaseapp.com",
+    projectId: "zurimultimediaspace",
+    storageBucket: "zurimultimediaspace.firebasestorage.app",
+    messagingSenderId: "493537014777",
+    appId: "1:493537014777:web:212a2cc302ff379caf4328",
+    measurementId: "G-0DBSMNVQKD"
   };
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
-</script>
-const firebaseConfig = {
-  apiKey: "REPLACE_ME",
-  authDomain: "REPLACE_ME.firebaseapp.com",
-  projectId: "REPLACE_ME",
-  storageBucket: "REPLACE_ME.appspot.com",
-  messagingSenderId: "REPLACE_ME",
-  appId: "REPLACE_ME"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const storage = firebase.storage();
-const db = firebase.firestore();
 
 /* --------- Sign in anonymously (creates a user for safe writes) --------- */
 auth.signInAnonymously().catch(err => {
@@ -508,4 +493,5 @@ document.getElementById('btnRefresh').addEventListener('click', renderFromFirest
 </script>
 </body>
 </html>
+
 
