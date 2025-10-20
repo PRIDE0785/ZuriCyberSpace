@@ -1,613 +1,1208 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ZuriMultimediaSpace — Multimedia store & services</title>
-<meta name="description" content="ZuriMultimediaSpace: Upload, browse & download videos, reels, posters and order multimedia services."/>
-<link rel="icon" href="data:," />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaddyPride | Creative Portfolio & Order Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff9900;
+            --primary-dark: #e68900;
+            --secondary: #1a1a1a;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #666;
+            --light-gray: #e6e6e6;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-<style>
-  :root{
-    --bg:#0f1724;
-    --card:#0b1220;
-    --muted:#94a3b8;
-    --accent1: #6d28d9;
-    --accent2: #8b5cf6;
-    --glass: rgba(255,255,255,0.04);
-    --card-radius: 12px;
-  }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  /* Basic reset */
-  *{box-sizing:border-box}
-  html,body,#app{height:100%}
-  body{
-    margin:0;
-    background: linear-gradient(180deg,#081124 0%, #071028 40%, #031027 100%);
-    color:#e6eef8;
-    font-family: Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.4;
-    padding:24px;
-  }
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-  /* Container */
-  .site{
-    max-width:1200px;
-    margin:0 auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:16px;
-    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-    overflow:hidden;
-    display:grid;
-    grid-template-columns: 260px 1fr;
-    min-height:80vh;
-  }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-  /* Sidebar */
-  .sidebar{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding:20px;
-    border-right: 1px solid rgba(255,255,255,0.03);
-  }
-  .brand{
-    display:flex;gap:10px;align-items:center;margin-bottom:18px;
-  }
-  .logo{
-    width:46px;height:46px;border-radius:10px;
-    background: linear-gradient(135deg,var(--accent1),var(--accent2));
-    display:flex;align-items:center;justify-content:center;font-weight:700;
-    box-shadow: 0 6px 18px rgba(139,92,246,0.18);
-    font-size:18px;
-  }
-  .brand h1{font-size:16px;margin:0}
-  .brand p{margin:0;font-size:12px;color:var(--muted)}
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-  .nav{margin-top:16px;display:flex;flex-direction:column;gap:8px}
-  .nav button{
-    background:transparent;border:0;padding:10px 12px;border-radius:10px;color:inherit;text-align:left;
-    cursor:pointer;font-weight:600;
-  }
-  .nav button.active{background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow: inset 0 1px 0 rgba(255,255,255,0.02)}
-  .section-title{font-size:12px;color:var(--muted);margin-top:20px;margin-bottom:8px}
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
 
-  select,input[type="search"]{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
-  .sidebar .small{font-size:12px;color:var(--muted)}
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
 
-  /* Main area */
-  .main{
-    padding:20px;
-  }
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .searchbar{display:flex;gap:10px;align-items:center}
-  .searchbar input{min-width:260px;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+        .logo i {
+            margin-right: 8px;
+        }
 
-  .hero{
-    margin-top:18px;padding:18px;border-radius:14px;background:linear-gradient(90deg, rgba(109,40,217,0.12), rgba(139,92,246,0.06));
-    display:flex;align-items:center;justify-content:space-between;gap:12px;
-  }
-  .hero .left h2{margin:0;font-size:20px}
-  .hero .left p{margin:6px 0 0;color:var(--muted);font-size:13px}
-  .hero .actions{display:flex;gap:8px}
-  .btn{
-    padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
-    background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:white; box-shadow: 0 8px 24px rgba(99,102,241,0.12);
-  }
-  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
 
-  /* Grid */
-  .grid{display:grid;gap:14px}
-  .grid.media{grid-template-columns: repeat(auto-fill,minmax(220px,1fr));margin-top:14px}
-  .card{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:var(--card-radius);padding:8px;border:1px solid rgba(255,255,255,0.03);
-    display:flex;flex-direction:column;gap:8px;
-  }
-  .thumb{height:140px;border-radius:10px;overflow:hidden;background:#071225;display:flex;align-items:center;justify-content:center}
-  .thumb img, .thumb video{width:100%;height:100%;object-fit:cover;display:block}
+        .nav-links li {
+            margin-left: 25px;
+        }
 
-  .meta{display:flex;justify-content:space-between;align-items:center;padding:6px 2px}
-  .meta .title{font-weight:700;font-size:14px}
-  .meta .desc{font-size:12px;color:var(--muted)}
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
 
-  .card .actions{display:flex;gap:8px}
-  .card button{flex:1;padding:8px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
-  .card .download{background:rgba(255,255,255,0.03);color:#fff}
-  .card .add{background:linear-gradient(90deg,#0ea5a4,#06b6d4);color:#002;box-shadow:0 8px 18px rgba(6,182,212,0.08)}
+        .nav-links a:hover {
+            color: var(--primary);
+        }
 
-  /* Right column */
-  .right-col{margin-top:12px}
-  .panel{background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-  .orders-list .order{padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);margin-bottom:8px}
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
 
-  footer{padding:16px;text-align:center;color:var(--muted);font-size:13px;background:transparent}
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-  /* Responsive */
-  @media (max-width:980px){
-    .site{grid-template-columns:1fr; padding-bottom:40px}
-    .sidebar{display:flex;flex-direction:row;gap:12px;overflow:auto;padding:12px}
-    .brand p{display:none}
-    .nav{flex-direction:row}
-    .sidebar .section-title{display:none}
-  }
-</style>
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            animation: fadeIn 2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Quick Order Section */
+        .quick-order {
+            background-color: var(--white);
+            padding: 60px 0;
+        }
+
+        .quick-order-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--secondary);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .portfolio-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .portfolio-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        .portfolio-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .portfolio-content p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .service-card:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-10px);
+        }
+
+        .service-card i {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .service-card:hover i {
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            left: 25px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: var(--light-gray);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .portfolio-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div id="app" class="site" aria-live="polite">
-  <!-- SIDEBAR -->
-  <aside class="sidebar" aria-label="Navigation">
-    <div class="brand">
-      <div class="logo">Z</div>
-      <div>
-        <h1>ZuriMultimediaSpace</h1>
-        <p>Download reels, videos & order services</p>
-      </div>
-    </div>
-
-    <nav class="nav" id="nav">
-      <button class="active" data-view="explore">Explore</button>
-      <button data-view="upload">Upload</button>
-      <button data-view="services">Services</button>
-      <button data-view="orders">My Orders</button>
-    </nav>
-
-    <div class="section-title">Quick filters</div>
-    <div class="small">
-      <label for="category">Category</label>
-      <select id="category">
-        <option value="all">All</option>
-        <option value="video">Videos</option>
-        <option value="reel">Reels</option>
-        <option value="poster">Posters</option>
-        <option value="design">Designs</option>
-      </select>
-      <div style="height:12px"></div>
-      <div class="section-title">Cart</div>
-      <div id="cartSummary" class="small">Items: 0</div>
-      <div style="height:8px"></div>
-      <button id="checkoutBtn" class="btn ghost" style="width:100%">Checkout</button>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main" role="main">
-    <div class="topbar">
-      <div class="searchbar">
-        <input id="search" type="search" placeholder="Search videos, reels, posters..." aria-label="Search"/>
-        <button id="btnUpload" class="btn ghost">Upload New</button>
-      </div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <div class="small">Contact: <strong style="color:#fff">+256 779 185824</strong></div>
-        <div class="small">Email: <strong style="color:#fff">paddypride6@mail.com</strong></div>
-      </div>
-    </div>
-
-    <div class="hero" role="region" aria-label="Hero">
-      <div class="left">
-        <h2>ZuriMultimediaSpace</h2>
-        <p>Upload your videos, reels, posters and let people download or order bespoke multimedia services.</p>
-      </div>
-      <div class="actions">
-        <button id="openUpload" class="btn">Publish</button>
-        <button id="openServices" class="btn ghost">Order Service</button>
-      </div>
-    </div>
-
-    <!-- DYNAMIC CONTENT -->
-    <section id="viewArea" style="margin-top:18px;">
-      <!-- Explore by default -->
-      <div data-view="explore" class="view">
-        <h3 style="margin:0 0 10px 0">Explore the Gallery</h3>
-        <div id="mediaGrid" class="grid media" aria-live="polite"></div>
-        <div id="emptyHint" style="text-align:center;color:var(--muted);margin-top:20px;display:none">
-          No media yet — Upload using the Publish button.
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo"><i class="fas fa-palette"></i> CyberNinja</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
         </div>
-      </div>
+    </header>
 
-      <div data-view="upload" class="view" style="display:none">
-        <h3>Publish New Media</h3>
-        <div style="height:10px"></div>
-        <div class="panel">
-          <form id="uploadForm">
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <input name="title" placeholder="Title (optional)" required style="flex:1;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)"/>
-              <select name="type" required style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)">
-                <option value="video">Video</option>
-                <option value="reel">Reel</option>
-                <option value="poster">Poster</option>
-                <option value="design">Design</option>
-              </select>
-            </div>
-            <div style="height:8px"></div>
-            <textarea name="description" rows="3" placeholder="Short description (optional)" style="width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)"></textarea>
-            <div style="height:8px"></div>
-            <input name="file" type="file" accept="image/*,video/*" required/>
-            <div style="height:8px"></div>
-            <div style="display:flex;gap:8px">
-              <button type="submit" class="btn">Publish</button>
-              <button id="cancelUpload" type="button" class="btn ghost">Cancel</button>
-            </div>
-            <div id="uploadPreview" style="margin-top:10px"></div>
-          </form>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Creative Designs & Animations @CyberMall</h1>
+            <p>Showcasing our passion for design, animation, and creative projects. Let's bring your ideas to life!</p>
+            <a href="#quick-order" class="cta-button">Place Your Order Now</a>
         </div>
-      </div>
-
-      <div data-view="services" class="view" style="display:none">
-        <h3>Order a Service</h3>
-        <div style="height:10px"></div>
-        <div class="panel">
-          <form id="serviceForm">
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <select name="service" required style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);min-width:200px">
-                <option value="poster">Poster</option>
-                <option value="banner">Banner</option>
-                <option value="flyer">Flyer</option>
-                <option value="animation">Animation</option>
-                <option value="advert">Advert</option>
-                <option value="videography">Videography</option>
-                <option value="photography">Photography</option>
-              </select>
-              <input name="quantity" type="number" min="1" value="1" style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);width:120px">
-              <input name="deadline" type="date" style="padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)">
-            </div>
-            <div style="height:8px"></div>
-            <textarea name="details" rows="4" placeholder="Describe what you need (sizes, colors, text, references)" style="width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)"></textarea>
-            <div style="height:8px"></div>
-            <div style="display:flex;gap:8px">
-              <button type="submit" class="btn">Order via WhatsApp</button>
-              <button id="orderEmail" type="button" class="btn ghost">Order via Email</button>
-            </div>
-            <div style="height:8px"></div>
-            <div class="small" style="color:var(--muted)">Orders will open WhatsApp to send your request to our number +256 779 185824. Email will open your default email client addressed to paddypride6@mail.com.</div>
-          </form>
-        </div>
-      </div>
-
-      <div data-view="orders" class="view" style="display:none">
-        <h3>Your Orders</h3>
-        <div style="height:10px"></div>
-        <div id="ordersArea" class="orders-list panel">
-          <!-- orders inserted here -->
-        </div>
-      </div>
-
     </section>
 
+    <!-- Quick Order Section -->
+    <section class="quick-order" id="quick-order">
+        <div class="container">
+            <div class="section-title">
+                <h2>Quick Order Form</h2>
+                <p>Fill out this form to place your order quickly</p>
+            </div>
+            <div class="quick-order-form">
+                <form id="quickOrderForm">
+                    <div class="form-group">
+                        <label for="quick-name">Your Name</label>
+                        <input type="text" id="quick-name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quick-email">Your Email</label>
+                        <input type="email" id="quick-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quick-service">Service Interested In</label>
+                        <select id="quick-service" class="form-control" required>
+                            <option value="">Select a service</option>
+                            <option value="graphic-design">Graphic Design</option>
+                            <option value="video-production">Video Production</option>
+                            <option value="animation">3D Animation</option>
+                            <option value="ui-ux">UI/UX Design</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quick-message">Project Details</label>
+                        <textarea id="quick-message" class="form-control" placeholder="Describe your project requirements..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Order Request via WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Catalog and Work</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Project 1">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Brand Identity Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="brand-identity-sample.zip">
+                                    <i class="fas fa-download"></i> Download Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Brand Identity Design</h3>
+                        <p>Complete brand identity package including logo, color palette, and typography.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1558655146-db6e309e3f59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Project 2">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="3D Animation">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="3d-animation-sample.zip">
+                                    <i class="fas fa-download"></i> Download Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>3D Animation</h3>
+                        <p>Character animation for a promotional video with detailed environments.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Project 3">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Motion Graphics">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="motion-graphics-sample.zip">
+                                    <i class="fas fa-download"></i> Download Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Motion Graphics</h3>
+                        <p>Dynamic motion graphics for social media campaigns and advertisements.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Project 4">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="UI/UX Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="ui-ux-sample.zip">
+                                    <i class="fas fa-download"></i> Download Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>UI/UX Design</h3>
+                        <p>User interface and experience design for mobile and web applications.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Project 5">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Product Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="product-design-sample.zip">
+                                    <i class="fas fa-download"></i> Download Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Product Design</h3>
+                        <p>Innovative product designs with focus on functionality and aesthetics.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Project 6">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Video Production">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="video-production-sample.zip">
+                                    <i class="fas fa-download"></i> Download Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Video Production</h3>
+                        <p>End-to-end video production from concept development to final editing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Graphic Design</h3>
+                    <p>Creative designs for branding, marketing materials, and digital content.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-film"></i>
+                    <h3>Video Production</h3>
+                    <p>Professional video creation, editing, and post-production services.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-cube"></i>
+                    <h3>3D Animation</h3>
+                    <p>High-quality 3D modeling, animation, and visual effects.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design for websites, apps, and digital products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h3>Call Me</h3>
+                            <p>+256 779 185 824</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email Me</h3>
+                            <p>paddypride6@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <p>+256 779 185 824</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Available for remote work worldwide</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="graphic-design">Graphic Design</option>
+                                <option value="video-production">Video Production</option>
+                                <option value="animation">3D Animation</option>
+                                <option value="ui-ux">UI/UX Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" class="form-control" placeholder="Describe your project requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Order Request via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-      ZuriMultimediaSpace — built with HTML, CSS & JavaScript • Local demo (stores uploads in browser)
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PaddyPride</h3>
+                    <p>Creating exceptional designs, animations, and videos that bring ideas to life and captivate audiences.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Graphic Design</a></li>
+                        <li><a href="#">Video Production</a></li>
+                        <li><a href="#">3D Animation</a></li>
+                        <li><a href="#">UI/UX Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone-alt"></i> +256 779 185 824</li>
+                        <li><i class="fas fa-envelope"></i> paddypride6@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> +256 779 185 824</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ZuriCyberSpace powered by CyberNinja. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
-  </main>
-</div>
 
-<script>
-/* ===== ZuriMultimediaSpace — client-side single-file implementation =====
-   - Saves media and orders in localStorage
-   - Uploads: stored as data URLs (suitable for demo). For production use cloud storage (S3/Cloudinary).
-   - Orders: opens WhatsApp link and mailto as requested.
-*/
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/256779185824?text=Hello!%20I'm%20interested%20in%20your%20services.%20Can%20we%20talk%20about%20a%20project?" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-// Config: contact and email
-const CONTACT_WA = '256779185824';         // WhatsApp number (without plus, country code first)
-const CONTACT_EMAIL = 'paddypride6@mail.com';
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
 
-// Utilities
-const q = (sel, root=document) => root.querySelector(sel);
-const qq = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-const nowISO = () => new Date().toISOString();
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Order Project</h2>
+            <form id="projectOrderForm">
+                <div class="form-group">
+                    <label for="project-name">Project Name</label>
+                    <input type="text" id="project-name" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="customer-name">Your Name</label>
+                    <input type="text" id="customer-name" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-email">Your Email</label>
+                    <input type="email" id="customer-email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-message">Additional Details</label>
+                    <textarea id="customer-message" class="form-control" placeholder="Add any specific requirements or details..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Order via WhatsApp</button>
+            </form>
+        </div>
+    </div>
 
-// State
-let library = JSON.parse(localStorage.getItem('zuri_library') || '[]');
-let orders = JSON.parse(localStorage.getItem('zuri_orders') || '[]');
-let cart = JSON.parse(localStorage.getItem('zuri_cart') || '[]');
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
 
-const nav = q('#nav');
-const views = qq('[data-view]');
-const mediaGrid = q('#mediaGrid');
-const emptyHint = q('#emptyHint');
-const cartSummary = q('#cartSummary');
-const checkoutBtn = q('#checkoutBtn');
-const searchInput = q('#search');
-const categorySelect = q('#category');
+        // Quick Order Form Submission to WhatsApp
+        document.getElementById('quickOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('quick-name').value;
+            const email = document.getElementById('quick-email').value;
+            const service = document.getElementById('quick-service').value;
+            const message = document.getElementById('quick-message').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Hello! I'm interested in placing an order. Here are my details:%0A%0AName: ${name}%0AEmail: ${email}%0AService: ${service}%0AProject Details: ${message}`;
+            
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show confirmation message
+            alert('Thank you for your order request! You will be redirected to WhatsApp to complete your order.');
+        });
 
-// Navigation
-nav.addEventListener('click', (ev) => {
-  if (ev.target.tagName === 'BUTTON') {
-    qq('#nav button').forEach(b=>b.classList.remove('active'));
-    ev.target.classList.add('active');
-    showView(ev.target.dataset.view);
-  }
-});
+        // Contact Form Submission to WhatsApp
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Hello! I'm interested in placing an order. Here are my details:%0A%0AName: ${name}%0AEmail: ${email}%0AService: ${service}%0AProject Details: ${message}`;
+            
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show confirmation message
+            alert('Thank you for your order request! You will be redirected to WhatsApp to complete your order.');
+        });
 
-function showView(name) {
-  views.forEach(v => {
-    if (v.dataset.view === name) v.style.display = '';
-    else v.style.display = 'none';
-  });
-}
+        // Portfolio Order Buttons
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const projectName = this.getAttribute('data-project');
+                document.getElementById('project-name').value = projectName;
+                document.getElementById('orderModal').style.display = 'flex';
+            });
+        });
 
-// Load initial view
-showView('explore');
+        // Portfolio Download Buttons
+        document.querySelectorAll('.download-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const fileName = this.getAttribute('data-file');
+                
+                // Create a temporary download link
+                const link = document.createElement('a');
+                link.href = '#'; // In a real implementation, this would be the actual file URL
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show message
+                alert(`Sample file "${fileName}" download started. In a real implementation, this would download the actual file.`);
+            });
+        });
 
-// Search & filter
-searchInput.addEventListener('input', renderLibrary);
-categorySelect.addEventListener('change', renderLibrary);
+        // Project Order Form Submission
+        document.getElementById('projectOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const projectName = document.getElementById('project-name').value;
+            const customerName = document.getElementById('customer-name').value;
+            const customerEmail = document.getElementById('customer-email').value;
+            const customerMessage = document.getElementById('customer-message').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Hello! I'm interested in ordering the project: ${projectName}.%0A%0AMy Details:%0AName: ${customerName}%0AEmail: ${customerEmail}%0AAdditional Details: ${customerMessage}`;
+            
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            
+            // Close modal
+            document.getElementById('orderModal').style.display = 'none';
+            
+            // Reset form
+            this.reset();
+        });
 
-// Upload open buttons
-q('#btnUpload').addEventListener('click', () => { activateNav('upload'); });
-q('#openUpload').addEventListener('click', () => { activateNav('upload'); });
-q('#openServices').addEventListener('click', () => { activateNav('services'); });
+        // Close Modal
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('orderModal').style.display = 'none';
+        });
 
-function activateNav(viewName){
-  qq('#nav button').forEach(b => {
-    b.classList.toggle('active', b.dataset.view === viewName);
-  });
-  showView(viewName);
-}
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('orderModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
 
-/* ----- Upload logic ----- */
-const uploadForm = q('#uploadForm');
-const uploadPreview = q('#uploadPreview');
-const cancelUpload = q('#cancelUpload');
+        // Scroll Animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
 
-let pendingFileDataURL = null;
+        // Back to Top Button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
 
-uploadForm.file.addEventListener('change', async (ev) => {
-  const f = ev.target.files[0];
-  if (!f) { uploadPreview.innerHTML = ''; pendingFileDataURL = null; return; }
-  // validate size: allow up to 60MB demo (adjust as needed)
-  const maxBytes = 60 * 1024 * 1024;
-  if (f.size > maxBytes) {
-    alert('File too large for demo (max 60MB). Please use a smaller file.');
-    ev.target.value = '';
-    return;
-  }
-  // preview and read data URL
-  const reader = new FileReader();
-  reader.onload = () => {
-    pendingFileDataURL = reader.result;
-    showUploadPreview(f, reader.result);
-  };
-  if (f.type.startsWith('image/') || f.type.startsWith('video/')) {
-    reader.readAsDataURL(f);
-  } else {
-    alert('Unsupported file type. Please upload image or video.');
-    ev.target.value = '';
-  }
-});
-
-function showUploadPreview(file, dataUrl) {
-  uploadPreview.innerHTML = '';
-  const container = document.createElement('div');
-  container.style.display = 'flex';
-  container.style.gap = '10px';
-  container.style.alignItems = 'center';
-  container.style.marginTop = '8px';
-  const thumb = document.createElement(file.type.startsWith('image/') ? 'img' : 'video');
-  thumb.src = dataUrl;
-  if (file.type.startsWith('video/')) thumb.controls = true;
-  thumb.style.maxWidth = '160px';
-  thumb.style.borderRadius = '8px';
-  container.appendChild(thumb);
-  const info = document.createElement('div');
-  info.innerHTML = `<div style="font-weight:700">${file.name}</div>
-                    <div style="color:var(--muted);font-size:13px">${(file.size/1024|0)} KB • ${file.type}</div>`;
-  container.appendChild(info);
-  uploadPreview.appendChild(container);
-}
-
-cancelUpload.addEventListener('click', () => {
-  uploadForm.reset();
-  uploadPreview.innerHTML = '';
-  pendingFileDataURL = null;
-  activateNav('explore');
-});
-
-// On publish
-uploadForm.addEventListener('submit', async (ev) => {
-  ev.preventDefault();
-  const title = uploadForm.title.value.trim() || (uploadForm.file.files[0] && uploadForm.file.files[0].name) || 'Untitled';
-  const description = uploadForm.description.value.trim();
-  const type = uploadForm.type.value;
-  const f = uploadForm.file.files[0];
-  if (!f || !pendingFileDataURL) return alert('Please select a valid image or video file.');
-
-  // Build item
-  const item = {
-    id: 'm_' + Date.now(),
-    title, description, type,
-    filename: f.name,
-    mime: f.type,
-    size: f.size,
-    data: pendingFileDataURL,
-    createdAt: nowISO(),
-    price: (type === 'poster' || type === 'design') ? 3 : 5
-  };
-  library.unshift(item);
-  persistLibrary();
-  uploadForm.reset();
-  uploadPreview.innerHTML = '';
-  pendingFileDataURL = null;
-  activateNav('explore');
-  renderLibrary();
-});
-
-/* ----- Library rendering ----- */
-function persistLibrary(){ localStorage.setItem('zuri_library', JSON.stringify(library)); }
-function persistOrders(){ localStorage.setItem('zuri_orders', JSON.stringify(orders)); }
-function persistCart(){ localStorage.setItem('zuri_cart', JSON.stringify(cart)); updateCartUI(); }
-
-function renderLibrary(){
-  mediaGrid.innerHTML = '';
-  const qtext = searchInput.value.trim().toLowerCase();
-  const cat = categorySelect.value;
-  let visible = library.filter(it => (cat === 'all' ? true : it.type === cat));
-  if (qtext) visible = visible.filter(it => (it.title + ' ' + (it.description||'')).toLowerCase().includes(qtext));
-  if (visible.length === 0){
-    emptyHint.style.display = '';
-  } else {
-    emptyHint.style.display = 'none';
-  }
-
-  visible.forEach(item => {
-    const card = document.createElement('div'); card.className = 'card';
-    const thumb = document.createElement('div'); thumb.className = 'thumb';
-    if (item.mime && item.mime.startsWith('video/')) {
-      const v = document.createElement('video'); v.src = item.data; v.controls = true; v.preload = 'metadata';
-      thumb.appendChild(v);
-    } else {
-      const img = document.createElement('img'); img.src = item.data; img.alt = item.title;
-      thumb.appendChild(img);
-    }
-    card.appendChild(thumb);
-
-    const meta = document.createElement('div'); meta.className='meta';
-    const left = document.createElement('div');
-    left.innerHTML = `<div class="title">${escapeHtml(item.title)}</div>
-                      <div class="desc">${escapeHtml(item.description || item.type)}</div>`;
-    meta.appendChild(left);
-    const right = document.createElement('div');
-    right.innerHTML = `<div style="font-weight:700">$${item.price}</div>`;
-    meta.appendChild(right);
-    card.appendChild(meta);
-
-    const act = document.createElement('div'); act.className='actions';
-    const dl = document.createElement('button'); dl.className='download'; dl.textContent='Download';
-    dl.addEventListener('click', () => downloadDataURL(item));
-    const add = document.createElement('button'); add.className='add'; add.textContent='Add to Cart';
-    add.addEventListener('click', () => {
-      cart.push(item); persistCart();
-      alert('Added to cart. Open checkout to pay & download.');
-    });
-    act.appendChild(dl); act.appendChild(add);
-    card.appendChild(act);
-
-    mediaGrid.appendChild(card);
-  });
-}
-
-function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-/* ----- Download utility ----- */
-function downloadDataURL(item){
-  // convert data URL to blob and download
-  try {
-    const a = document.createElement('a');
-    a.href = item.data;
-    a.download = item.filename || (item.title || 'file');
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  } catch(e){
-    alert('Download failed: ' + e.message);
-  }
-}
-
-/* ----- Orders (WhatsApp + email) ----- */
-const serviceForm = q('#serviceForm');
-const orderEmailBtn = q('#orderEmail');
-const ordersArea = q('#ordersArea');
-
-serviceForm.addEventListener('submit', (ev) => {
-  ev.preventDefault();
-  const form = new FormData(serviceForm);
-  const service = form.get('service');
-  const quantity = form.get('quantity') || 1;
-  const deadline = form.get('deadline') || 'ASAP';
-  const details = form.get('details') || '';
-  const order = {
-    id: 'o_' + Date.now(),
-    service, quantity, deadline, details,
-    createdAt: nowISO()
-  };
-  // Save locally for record
-  orders.unshift(order);
-  persistOrders();
-  renderOrders();
-
-  // Build message for WhatsApp
-  const message = encodeURIComponent(
-    `Hello ZuriMultimediaSpace!\nI want to order: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails: ${details}\n\nPlease contact me to proceed.`
-  );
-  // Open WhatsApp chat via wa.me (opens web or app)
-  const waUrl = `https://wa.me/${CONTACT_WA}?text=${message}`;
-  window.open(waUrl, '_blank');
-
-  // Also open mailto fallback in separate tab so user can choose
-  const subject = encodeURIComponent(`Order: ${service} — ZuriMultimediaSpace`);
-  const body = encodeURIComponent(`Hello,\n\nI would like to place an order:\n\nService: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails: ${details}\n\nRegards,\n`);
-  const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  // open mailto in new tab if possible (some browsers block it)
-  window.location.href = mailto;
-});
-
-orderEmailBtn.addEventListener('click', () => {
-  const form = new FormData(serviceForm);
-  const service = form.get('service') || '';
-  const quantity = form.get('quantity') || 1;
-  const deadline = form.get('deadline') || 'ASAP';
-  const details = form.get('details') || '';
-  const subject = encodeURIComponent(`Order: ${service} — ZuriMultimediaSpace`);
-  const body = encodeURIComponent(`Hello,\n\nI would like to place an order:\n\nService: ${service}\nQuantity: ${quantity}\nDeadline: ${deadline}\nDetails: ${details}\n\nRegards,\n`);
-  const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  window.location.href = mailto;
-});
-
-/* ----- Orders area render ----- */
-function renderOrders(){
-  ordersArea.innerHTML = '';
-  if (orders.length === 0) {
-    ordersArea.innerHTML = '<div style="color:var(--muted)">No orders yet. Create one using Services.</div>';
-    return;
-  }
-  orders.forEach(o => {
-    const el = document.createElement('div'); el.className='order';
-    el.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <div style="font-weight:800">${escapeHtml(o.service)} <span style="font-weight:600;color:var(--muted);font-size:13px">x${o.quantity}</span></div>
-        <div style="color:var(--muted);font-size:13px">${escapeHtml(o.details || '—')}</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:12px;color:var(--muted)">${new Date(o.createdAt).toLocaleString()}</div>
-        <div style="font-weight:700;margin-top:6px">Deadline: ${o.deadline}</div>
-      </div>
-    </div>`;
-    ordersArea.appendChild(el);
-  });
-}
-
-/* ----- Cart & Checkout (mock) ----- */
-checkoutBtn.addEventListener('click', () => {
-  if (cart.length === 0) return alert('Cart is empty.');
-  // Show simple confirm and perform simulated payment + start downloads
-  const total = cart.reduce((s,i)=>s+(i.price||5),0);
-  if (!confirm(`Pay $${total} for ${cart.length} item(s)? (Demo — no real payment)`)) return;
-  alert('Payment simulated. Preparing downloads...');
-  // Download all items
-  setTimeout(() => {
-    cart.forEach(i => downloadDataURL(i));
-    cart = []; persistCart();
-    alert('Downloads attempted. Thank you for using ZuriMultimediaSpace!');
-  }, 600);
-});
-
-function updateCartUI(){
-  cartSummary.textContent = `Items: ${cart.length}`;
-  persistCart();
-}
-updateCartUI();
-
-/* ----- Init render ----- */
-renderLibrary();
-renderOrders();
-
-/* ----- Helper: export library to json (dev) ----- */
-window.Zuri = {
-  exportLibrary: () => JSON.stringify(library),
-  importLibrary: (json) => { library = JSON.parse(json || '[]'); persistLibrary(); renderLibrary(); }
-};
-
-/* End of script */
-</script>
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
