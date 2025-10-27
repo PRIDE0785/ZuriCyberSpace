@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZuriCyberSpaceForum
+        - Tech Camp Forum</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<style>
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --dark-color: #343a40;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    padding: 100px 0;
+    margin-bottom: 40px;
+}
+
+.post-card {
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.sentiment-positive {
+    border-left-color: var(--success-color);
+}
+
+.sentiment-negative {
+    border-left-color: var(--danger-color);
+}
+
+.sentiment-neutral {
+    border-left-color: var(--warning-color);
+}
+
+.topic-tag {
+    background-color: #e9ecef;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-right: 5px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-sm {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment {
+    border-left: 3px solid #e9ecef;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.podcast-card {
+    transition: transform 0.3s ease;
+}
+
+.podcast-card:hover {
+    transform: scale(1.02);
+}
+
+.category-item:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.recommended-post {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.recommended-post:last-child {
+    border-bottom: none;
+}
+
+.vote-btn {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.vote-btn:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+}
+
+/* Animation for new posts */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+</style>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot me-2"></i>ZuriCyberSpace
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link active" href="#home">Home</a>
+                    <a class="nav-link" href="#discussions">Discussions</a>
+                    <a class="nav-link" href="#podcasts">Podcasts</a>
+                    <a class="nav-link" href="#login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                    <a class="nav-link" href="#register" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container text-center text-white">
+            <h1 class="display-4 mb-4">Welcome to ZuriCyberSpace</h1>
+            <p class="lead mb-4">Your virtual tech camp for developers, innovators, and learners</p>
+            <div class="hero-buttons">
+                <button class="btn btn-light btn-lg me-3" onclick="showSection('discussions')">Explore Discussions</button>
+                <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">Join Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-layer-group me-2"></i>Tech Categories</h5>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action category-item" data-category="web">
+                            <i class="fas fa-code me-2"></i>Web Development
+                            <span class="badge bg-primary float-end">24</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action category-item" data-category="data">
+                            <i class="fas fa-chart-bar me-2"></i>Data Science
+                            <span class="badge bg-primary float-end">18</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action category-item" data-category="ai">
+                            <i class="fas fa-robot me-2"></i>AI & ML
+                            <span class="badge bg-primary float-end">32</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action category-item" data-category="mobile">
+                            <i class="fas fa-mobile-alt me-2"></i>Mobile Dev
+                            <span class="badge bg-primary float-end">15</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action category-item" data-category="cyber">
+                            <i class="fas fa-shield-alt me-2"></i>Cybersecurity
+                            <span class="badge bg-primary float-end">21</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AI Recommendations -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h6><i class="fas fa-star me-2"></i>Recommended for You</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="recommended-post mb-3">
+                            <small><a href="#" class="text-decoration-none">React Hooks Best Practices</a></small>
+                            <div class="text-muted small">12 comments</div>
+                        </div>
+                        <div class="recommended-post mb-3">
+                            <small><a href="#" class="text-decoration-none">Python Data Analysis Tutorial</a></small>
+                            <div class="text-muted small">8 comments</div>
+                        </div>
+                        <div class="recommended-post">
+                            <small><a href="#" class="text-decoration-none">Machine Learning Basics</a></small>
+                            <div class="text-muted small">15 comments</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discussions Section -->
+            <div class="col-md-9">
+                <div id="discussions">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2><i class="fas fa-comments me-2"></i>Latest Discussions</h2>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                            <i class="fas fa-plus me-2"></i>New Post
+                        </button>
+                    </div>
+
+                    <!-- Posts will be dynamically inserted here -->
+                    <div id="posts-container">
+                        <!-- Posts loaded by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Podcasts Section -->
+                <div id="podcasts" style="display: none;">
+                    <h2><i class="fas fa-podcast me-2"></i>Tech Podcasts</h2>
+                    <div class="row" id="podcasts-container">
+                        <!-- Podcasts loaded by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to ZuriCyberSpace</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Join ZuriCyberSpace</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Post Modal -->
+    <div class="modal fade" id="createPostModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Discussion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createPostForm">
+                        <div class="mb-3">
+                            <label for="postTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="postTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postCategory" class="form-label">Category</label>
+                            <select class="form-select" id="postCategory" required>
+                                <option value="">Select a category</option>
+                                <option value="web">Web Development</option>
+                                <option value="data">Data Science</option>
+                                <option value="ai">AI & Machine Learning</option>
+                                <option value="mobile">Mobile Development</option>
+                                <option value="cyber">Cybersecurity</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postContent" class="form-label">Content</label>
+                            <textarea class="form-control" id="postContent" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Sample data - in real app, this would come from a backend
+let posts = [
+    {
+        id: 1,
+        title: "React Hooks Best Practices",
+        content: "I've been working with React Hooks for a while and wanted to share some best practices I've discovered...",
+        author: "sarah_chen",
+        category: "web",
+        createdAt: "2024-01-15T10:30:00",
+        votes: 42,
+        comments: 8,
+        sentiment: "positive",
+        topics: ["react", "hooks", "best practices"]
+    },
+    {
+        id: 2,
+        title: "Machine Learning Project Ideas for Beginners",
+        content: "Looking for some beginner-friendly ML projects to get started? Here are 10 ideas that helped me learn...",
+        author: "alex_rodriguez",
+        category: "ai",
+        createdAt: "2024-01-14T15:20:00",
+        votes: 28,
+        comments: 15,
+        sentiment: "positive",
+        topics: ["machine learning", "beginners", "projects"]
+    },
+    {
+        id: 3,
+        title: "Python vs R for Data Analysis",
+        content: "What are your thoughts on using Python vs R for data analysis? I'm starting a new project and would love some insights...",
+        author: "maya_patel",
+        category: "data",
+        createdAt: "2024-01-14T09:15:00",
+        votes: 35,
+        comments: 22,
+        sentiment: "neutral",
+        topics: ["python", "r", "data analysis"]
+    }
+];
+
+let podcasts = [
+    {
+        id: 1,
+        title: "The Future of Web Development",
+        description: "Exploring the latest trends and technologies shaping the future of web development.",
+        host: "Tech Talks Daily",
+        duration: "45:18",
+        listens: 1247,
+        thumbnail: "🎙️"
+    },
+    {
+        id: 2,
+        title: "AI Ethics and Society",
+        description: "A deep dive into the ethical considerations of artificial intelligence in modern society.",
+        host: "Dr. Maya Patel",
+        duration: "38:42",
+        listens: 892,
+        thumbnail: "🎙️"
+    }
+];
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    loadPosts();
+    loadPodcasts();
+    setupEventListeners();
+});
+
+function loadPosts() {
+    const container = document.getElementById('posts-container');
+    container.innerHTML = '';
+    
+    posts.forEach(post => {
+        const postElement = createPostElement(post);
+        container.appendChild(postElement);
+    });
+}
+
+function createPostElement(post) {
+    const postDiv = document.createElement('div');
+    postDiv.className = `card post-card sentiment-${post.sentiment} fade-in`;
+    
+    const timeAgo = getTimeAgo(post.createdAt);
+    
+    postDiv.innerHTML = `
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-title">
+                    <a href="#" class="text-decoration-none" onclick="viewPost(${post.id})">${post.title}</a>
+                </h5>
+                <span class="badge bg-secondary">${getCategoryName(post.category)}</span>
+            </div>
+            
+            <p class="card-text">${post.content}</p>
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <div class="avatar bg-primary text-white d-flex align-items-center justify-content-center me-2">
+                        ${post.author.charAt(0).toUpperCase()}
+                    </div>
+                    <small class="text-muted">By ${post.author} • ${timeAgo}</small>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <button class="vote-btn text-success me-2" onclick="votePost(${post.id}, 'up')">
+                        <i class="fas fa-arrow-up"></i> ${post.votes}
+                    </button>
+                    <span class="text-muted me-3">
+                        <i class="fas fa-comment"></i> ${post.comments}
+                    </span>
+                </div>
+            </div>
+            
+            ${post.topics ? `
+            <div class="mt-2">
+                ${post.topics.map(topic => `<span class="topic-tag">${topic}</span>`).join('')}
+            </div>
+            ` : ''}
+            
+            <div class="sentiment-indicator mt-2">
+                <i class="fas fa-${getSentimentIcon(post.sentiment)} text-${post.sentiment === 'positive' ? 'success' : post.sentiment === 'negative' ? 'danger' : 'warning'}"></i>
+                <small class="text-muted ms-1">${post.sentiment.charAt(0).toUpperCase() + post.sentiment.slice(1)} Discussion</small>
+            </div>
+        </div>
+    `;
+    
+    return postDiv;
+}
+
+function loadPodcasts() {
+    const container = document.getElementById('podcasts-container');
+    container.innerHTML = '';
+    
+    podcasts.forEach(podcast => {
+        const podcastElement = createPodcastElement(podcast);
+        container.appendChild(podcastElement);
+    });
+}
+
+function createPodcastElement(podcast) {
+    const colDiv = document.createElement('div');
+    colDiv.className = 'col-md-6 mb-4';
+    
+    colDiv.innerHTML = `
+        <div class="card podcast-card h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-start mb-3">
+                    <div class="podcast-thumb me-3 fs-1">${podcast.thumbnail}</div>
+                    <div>
+                        <h5 class="card-title">${podcast.title}</h5>
+                        <p class="card-text text-muted">${podcast.description}</p>
+                    </div>
+                </div>
+                <div class="podcast-meta">
+                    <small class="text-muted">
+                        <i class="fas fa-user me-1"></i>${podcast.host} • 
+                        <i class="fas fa-clock me-1"></i>${podcast.duration} • 
+                        <i class="fas fa-headphones me-1"></i>${podcast.listens} listens
+                    </small>
+                </div>
+                <button class="btn btn-outline-primary btn-sm mt-2" onclick="playPodcast(${podcast.id})">
+                    <i class="fas fa-play me-1"></i>Listen Now
+                </button>
+            </div>
+        </div>
+    `;
+    
+    return colDiv;
+}
+
+function setupEventListeners() {
+    // Login form
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Login functionality would connect to backend in real application');
+        bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+    });
+    
+    // Register form
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Registration functionality would connect to backend in real application');
+        bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
+    });
+    
+    // Create post form
+    document.getElementById('createPostForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        createNewPost();
+    });
+    
+    // Category filters
+    document.querySelectorAll('.category-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const category = this.getAttribute('data-category');
+            filterPostsByCategory(category);
+        });
+    });
+}
+
+function createNewPost() {
+    const title = document.getElementById('postTitle').value;
+    const category = document.getElementById('postCategory').value;
+    const content = document.getElementById('postContent').value;
+    
+    const newPost = {
+        id: posts.length + 1,
+        title: title,
+        content: content,
+        author: "current_user", // In real app, this would be the logged-in user
+        category: category,
+        createdAt: new Date().toISOString(),
+        votes: 0,
+        comments: 0,
+        sentiment: "neutral",
+        topics: extractTopics(content)
+    };
+    
+    posts.unshift(newPost); // Add to beginning of array
+    loadPosts();
+    
+    // Reset form and close modal
+    document.getElementById('createPostForm').reset();
+    bootstrap.Modal.getInstance(document.getElementById('createPostModal')).hide();
+    
+    alert('Post created successfully!');
+}
+
+function extractTopics(content) {
+    // Simple topic extraction - in real app, this would use AI/NLP
+    const words = content.toLowerCase().split(' ').filter(word => word.length > 3);
+    const commonWords = ['this', 'that', 'with', 'have', 'from', 'they', 'what'];
+    return [...new Set(words.filter(word => !commonWords.includes(word)))].slice(0, 3);
+}
+
+function filterPostsByCategory(category) {
+    const filteredPosts = category ? posts.filter(post => post.category === category) : posts;
+    const container = document.getElementById('posts-container');
+    container.innerHTML = '';
+    
+    filteredPosts.forEach(post => {
+        const postElement = createPostElement(post);
+        container.appendChild(postElement);
+    });
+}
+
+function viewPost(postId) {
+    const post = posts.find(p => p.id === postId);
+    if (post) {
+        alert(`Viewing post: ${post.title}\n\nIn a real application, this would open a detailed post view with comments.`);
+    }
+}
+
+function votePost(postId, type) {
+    const post = posts.find(p => p.id === postId);
+    if (post) {
+        if (type === 'up') {
+            post.votes++;
+        } else {
+            post.votes--;
+        }
+        loadPosts();
+    }
+}
+
+function playPodcast(podcastId) {
+    const podcast = podcasts.find(p => p.id === podcastId);
+    if (podcast) {
+        alert(`Now playing: ${podcast.title}\n\nIn a real application, this would open a podcast player.`);
+    }
+}
+
+function showSection(sectionId) {
+    document.getElementById('discussions').style.display = sectionId === 'discussions' ? 'block' : 'none';
+    document.getElementById('podcasts').style.display = sectionId === 'podcasts' ? 'block' : 'none';
+}
+
+function getCategoryName(category) {
+    const categories = {
+        'web': 'Web Development',
+        'data': 'Data Science',
+        'ai': 'AI & ML',
+        'mobile': 'Mobile Dev',
+        'cyber': 'Cybersecurity'
+    };
+    return categories[category] || category;
+}
+
+function getSentimentIcon(sentiment) {
+    const icons = {
+        'positive': 'smile',
+        'negative': 'frown',
+        'neutral': 'meh'
+    };
+    return icons[sentiment] || 'meh';
+}
+
+function getTimeAgo(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMins / 60);
+    const diffDays = Math.floor(diffHours / 24);
+    
+    if (diffMins < 1) return 'just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    return date.toLocaleDateString();
+}
+    </script>
+</body>
+</html>
