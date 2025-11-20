@@ -1,0 +1,18 @@
+{
+  "name": "Cyberspace Design Portfolio",
+  "short_name": "CyberDesign",
+  "description": "Professional creative design services - Graphic Design, 3D Animation, Video Production, UI/UX Design",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff9900",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "500x500",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
