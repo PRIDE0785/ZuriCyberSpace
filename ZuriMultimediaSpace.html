@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyberspace Design Order and download| Creative Portfolio & Order Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<!-- PWA Manifest -->
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#ff9900">
-<link rel="icon" href="/icon.png">
-<link rel="apple-touch-icon" href="/icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<style>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ff9900">
+    <link rel="icon" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <style>
         :root {
             --primary: #ff9900;
             --primary-dark: #e68900;
@@ -174,7 +176,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Reduced darkness */
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
 
@@ -627,13 +629,15 @@
             color: var(--gray);
             font-size: 14px;
         }
-.portfolio-btn a{
- text-decoration: none;
+
+        .portfolio-btn a {
+            text-decoration: none;
             color: var(--white);
             font-size: 14px;
             transition: var(--transition);
             position: relative;
-}
+        }
+
         /* Services Section */
         .services {
             background-color: var(--white);
@@ -707,7 +711,7 @@
         }
         
         .dot.active {
-            background: #ff9900; /* Jumia orange */
+            background: #ff9900;
             transform: scale(1.3);
         }
         
@@ -721,7 +725,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: #ff9900; /* Jumia orange */
+            background: #ff9900;
             border: none;
             color: white;
             font-size: 1.2rem;
@@ -738,7 +742,7 @@
         }
         
         .nav-btn:hover {
-            background: #e68a00; /* Darker Jumia orange */
+            background: #e68a00;
             transform: translateY(-50%) scale(1.1);
         }
         
@@ -1033,6 +1037,113 @@
             transform: translateY(-5px);
         }
 
+        /* Install Prompt Styles */
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff9900, #e68900);
+            color: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            transform: translateY(150%);
+            transition: transform 0.4s ease;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .install-prompt.show {
+            transform: translateY(0);
+        }
+
+        .install-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .install-icon {
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .install-text {
+            flex: 1;
+        }
+
+        .install-text h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .install-text p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .install-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .install-btn {
+            background: white;
+            color: #ff9900;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Success Message Animation */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         /* Responsive Styles */
         @media (max-width: 768px) {
             .nav-links {
@@ -1115,6 +1226,35 @@
             .football-field {
                 width: 200px;
                 height: 150px;
+            }
+
+            .install-prompt {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+            
+            .install-content {
+                gap: 12px;
+            }
+            
+            .install-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .install-text h4 {
+                font-size: 14px;
+            }
+            
+            .install-text p {
+                font-size: 12px;
+            }
+            
+            .install-btn {
+                padding: 6px 12px;
+                font-size: 14px;
             }
         }
     </style>
@@ -1241,7 +1381,7 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item fade-in">
                     <div class="portfolio-img">
-                        <img src="brand ID.webp">
+                        <img src="brand ID.webp" alt="Brand Identity Design">
                         <div class="portfolio-overlay">
                             <div class="portfolio-actions">
                                 <button class="portfolio-btn order-btn" data-project="Brand Identity Design">
@@ -1260,7 +1400,7 @@
                 </div>
                 <div class="portfolio-item fade-in">
                     <div class="portfolio-img">
-                        <img src="3D Animation.jfif">
+                        <img src="3D Animation.jfif" alt="3D Animation">
                         <div class="portfolio-overlay">
                             <div class="portfolio-actions">
                                 <button class="portfolio-btn order-btn" data-project="3D Animation">
@@ -1279,7 +1419,7 @@
                 </div>
                 <div class="portfolio-item fade-in">
                     <div class="portfolio-img">
-                        <img src="motion graphics.jfif">
+                        <img src="motion graphics.jfif" alt="Motion Graphics">
                         <div class="portfolio-overlay">
                             <div class="portfolio-actions">
                                 <button class="portfolio-btn order-btn" data-project="Motion Graphics">
@@ -1298,7 +1438,7 @@
                 </div>
                 <div class="portfolio-item fade-in">
                     <div class="portfolio-img">
-                        <img src="UIUX Design.jfif">
+                        <img src="UIUX Design.jfif" alt="UI/UX Design">
                         <div class="portfolio-overlay">
                             <div class="portfolio-actions">
                                 <button class="portfolio-btn order-btn" data-project="UI/UX Design">
@@ -1317,7 +1457,7 @@
                 </div>
                 <div class="portfolio-item fade-in">
                     <div class="portfolio-img">
-                        <img src="productDesign.jfif">
+                        <img src="productDesign.jfif" alt="Product Design">
                         <div class="portfolio-overlay">
                             <div class="portfolio-actions">
                                 <button class="portfolio-btn order-btn" data-project="Product Design">
@@ -1336,7 +1476,7 @@
                 </div>
                 <div class="portfolio-item fade-in">
                     <div class="portfolio-img">
-                        <img src="IMG-20251119-WA0001.jpg">
+                        <img src="IMG-20251119-WA0001.jpg" alt="Graphics Design">
                         <div class="portfolio-overlay">
                             <div class="portfolio-actions">
                                 <button class="portfolio-btn order-btn" data-project="Graphics Design">
@@ -1514,7 +1654,7 @@
                         <a href="https://X.com/pride122349"><i class="fab fa-twitter"></i></a>
                         <a href="https://instagram.com/paddy.pride" title="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://linkedin.com/in/PADDY PRIDE" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-<a href="https://www.github.com/PRIDE0785" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.github.com/PRIDE0785" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -1529,10 +1669,10 @@
                 <div class="footer-column">
                     <h3>Services</h3>
                     <ul class="footer-links">
-                        <li><a href="IMG-20251119-WA0000.jpg" >Graphic Design</a></li>
-                        <li><a href="IMG-20251119-WA0001.jpg" >Video Production</a></li>
-                        <li><a href="IMG-20251119-WA0000.jpg" >3D Animation</a></li>
-                        <li><a href="IMG-20251119-WA0001.jpg" >UI/UX Design</a></li>
+                        <li><a href="IMG-20251119-WA0000.jpg">Graphic Design</a></li>
+                        <li><a href="IMG-20251119-WA0001.jpg">Video Production</a></li>
+                        <li><a href="IMG-20251119-WA0000.jpg">3D Animation</a></li>
+                        <li><a href="IMG-20251119-WA0001.jpg">UI/UX Design</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1587,6 +1727,23 @@
         </div>
     </div>
 
+    <!-- Install Prompt Notification -->
+    <div id="installPrompt" class="install-prompt">
+        <div class="install-content">
+            <div class="install-icon">
+                <i class="fas fa-download"></i>
+            </div>
+            <div class="install-text">
+                <h4>Install CyberDesign App</h4>
+                <p>Get quick access to our design services</p>
+            </div>
+            <div class="install-actions">
+                <button id="installButton" class="install-btn">Install</button>
+                <button id="closeInstall" class="close-btn">&times;</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Mobile Menu Toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
@@ -1602,16 +1759,10 @@
             const service = document.getElementById('quick-service').value;
             const message = document.getElementById('quick-message').value;
             
-            // Create WhatsApp message
             const whatsappMessage = `Hello! I'm interested in placing an order. Here are my details:%0A%0AName: ${name}%0AEmail: ${email}%0AService: ${service}%0AProject Details: ${message}`;
             
-            // Open WhatsApp with pre-filled message
             window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
-            
-            // Reset form
             this.reset();
-            
-            // Show confirmation message
             alert('Thank you for your order request! You will be redirected to WhatsApp to complete your order.');
         });
 
@@ -1624,16 +1775,10 @@
             const service = document.getElementById('service').value;
             const message = document.getElementById('message').value;
             
-            // Create WhatsApp message
             const whatsappMessage = `Hello! I'm interested in placing an order. Here are my details:%0A%0AName: ${name}%0AEmail: ${email}%0AService: ${service}%0AProject Details: ${message}`;
             
-            // Open WhatsApp with pre-filled message
             window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
-            
-            // Reset form
             this.reset();
-            
-            // Show confirmation message
             alert('Thank you for your order request! You will be redirected to WhatsApp to complete your order.');
         });
 
@@ -1655,16 +1800,10 @@
             const customerEmail = document.getElementById('customer-email').value;
             const customerMessage = document.getElementById('customer-message').value;
             
-            // Create WhatsApp message
             const whatsappMessage = `Hello! I'm interested in ordering the project: ${projectName}.%0A%0AMy Details:%0AName: ${customerName}%0AEmail: ${customerEmail}%0AAdditional Details: ${customerMessage}`;
             
-            // Open WhatsApp with pre-filled message
             window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
-            
-            // Close modal
             document.getElementById('orderModal').style.display = 'none';
-            
-            // Reset form
             this.reset();
         });
 
@@ -1692,33 +1831,26 @@
             let currentSlide = 0;
             let autoScroll;
             
-            // Function to update the carousel position
             function updateCarousel() {
                 servicesTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-                
-                // Update active dot
                 dots.forEach((dot, index) => {
                     dot.classList.toggle('active', index === currentSlide);
                 });
             }
             
-            // Next slide function
             function nextSlide() {
                 currentSlide = (currentSlide + 1) % servicesGroups.length;
                 updateCarousel();
             }
             
-            // Previous slide function
             function prevSlide() {
                 currentSlide = (currentSlide - 1 + servicesGroups.length) % servicesGroups.length;
                 updateCarousel();
             }
             
-            // Event listeners for navigation
             if (nextBtn) nextBtn.addEventListener('click', nextSlide);
             if (prevBtn) prevBtn.addEventListener('click', prevSlide);
             
-            // Dot navigation
             dots.forEach(dot => {
                 dot.addEventListener('click', function() {
                     currentSlide = parseInt(this.getAttribute('data-slide'));
@@ -1727,7 +1859,6 @@
                 });
             });
             
-            // Auto-scroll functionality
             function startAutoScroll() {
                 autoScroll = setInterval(nextSlide, 4000);
             }
@@ -1737,22 +1868,17 @@
                 startAutoScroll();
             }
             
-            // Pause auto-scroll on hover
             const carousel = document.querySelector('.services-carousel');
             if (carousel) {
                 carousel.addEventListener('mouseenter', () => clearInterval(autoScroll));
                 carousel.addEventListener('mouseleave', startAutoScroll);
             }
             
-            // Start auto-scroll
             startAutoScroll();
             
-            // Keyboard navigation for services carousel
             document.addEventListener('keydown', function(e) {
                 const servicesSection = document.getElementById('services');
                 const rect = servicesSection.getBoundingClientRect();
-                
-                // Only respond to arrow keys if services section is in view
                 if (rect.top < window.innerHeight && rect.bottom > 0) {
                     if (e.key === 'ArrowLeft') prevSlide();
                     if (e.key === 'ArrowRight') nextSlide();
@@ -1762,7 +1888,6 @@
 
         // Scroll Animations
         const fadeElements = document.querySelectorAll('.fade-in');
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1777,7 +1902,6 @@
 
         // Back to Top Button
         const backToTopButton = document.querySelector('.back-to-top');
-        
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
                 backToTopButton.classList.add('active');
@@ -1797,32 +1921,4168 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if(targetId === '#') return;
-                
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
                     document.querySelector('.nav-links').classList.remove('active');
                 }
             });
         });
-// Add this script to your HTML
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
-}
 
-// Install prompt
-let installPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  installPrompt = e;
-});
+        // Install Prompt Functionality
+        let deferredPrompt;
+        const installPromptElement = document.getElementById('installPrompt');
+        const installButton = document.getElementById('installButton');
+        const closeButton = document.getElementById('closeInstall');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('PWA installable - showing custom prompt');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            setTimeout(() => {
+                if (deferredPrompt && shouldShowPrompt()) {
+                    installPromptElement.classList.add('show');
+                    setTimeout(() => {
+                        if (installPromptElement.classList.contains('show')) {
+                            hideInstallPrompt();
+                        }
+                    }, 15000);
+                }
+            }, 3000);
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            console.log('Installing PWA...');
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response: ${outcome}`);
+            
+            hideInstallPrompt();
+            deferredPrompt = null;
+            
+            if (outcome === 'accepted') {
+                console.log('PWA was installed');
+                showInstallSuccess();
+            }
+        });
+
+        closeButton.addEventListener('click', () => {
+            hideInstallPrompt();
+            localStorage.setItem('installPromptDismissed', Date.now().toString());
+        });
+
+        function hideInstallPrompt() {
+            installPromptElement.classList.remove('show');
+        }
+
+        function showInstallSuccess() {
+            const successMsg = document.createElement('div');
+            successMsg.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #4CAF50;
+                    color: white;
+                    padding: 15px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                ">
+                    <strong>✓ App Installed!</strong><br>
+                    Check your home screen
+                </div>
+            `;
+            document.body.appendChild(successMsg);
+            setTimeout(() => successMsg.remove(), 3000);
+        }
+
+        function shouldShowPrompt() {
+            const lastDismissed = localStorage.getItem('installPromptDismissed');
+            if (!lastDismissed) return true;
+            const oneWeek = 7 * 24 * 60 * 60 * 1000;
+            return (Date.now() - parseInt(lastDismissed)) > oneWeek;
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberspace Design Order and download| Creative Portfolio & Order Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ff9900">
+    <link rel="icon" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <style>
+        :root {
+            --primary: #ff9900;
+            --primary-dark: #e68900;
+            --secondary: #1a1a1a;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #666;
+            --light-gray: #e6e6e6;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            animation: fadeIn 2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Quick Order Section */
+        .quick-order {
+            background-color: var(--secondary);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-order::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .quick-order .section-title {
+            position: relative;
+            z-index: 2;
+        }
+
+        .quick-order .section-title h2,
+        .quick-order .section-title p {
+            color: var(--white);
+        }
+
+        .quick-order-form-container {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quick-order-form {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* 3D Animation Background */
+        .animation-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sprinter Animation */
+        .sprinter {
+            position: absolute;
+            bottom: 15%;
+            left: -100px;
+            width: 80px;
+            height: 120px;
+            animation: sprint 12s infinite linear;
+        }
+
+        .sprinter-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 25px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ff5722, #e64a19);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .sprinter-head {
+            position: absolute;
+            bottom: 60px;
+            left: 5px;
+            width: 15px;
+            height: 15px;
+            background: #ffccbc;
+            border-radius: 50%;
+        }
+
+        .sprinter-arm {
+            position: absolute;
+            width: 8px;
+            height: 35px;
+            background: #ff5722;
+            border-radius: 4px;
+            transform-origin: top center;
+        }
+
+        .sprinter-arm.left {
+            bottom: 45px;
+            left: -5px;
+            animation: armSwing 0.5s infinite ease-in-out;
+        }
+
+        .sprinter-arm.right {
+            bottom: 45px;
+            right: -5px;
+            animation: armSwing 0.5s infinite ease-in-out reverse;
+        }
+
+        .sprinter-leg {
+            position: absolute;
+            width: 10px;
+            height: 45px;
+            background: #d84315;
+            border-radius: 5px;
+            transform-origin: top center;
+        }
+
+        .sprinter-leg.left {
+            bottom: 0;
+            left: 5px;
+            animation: legSwing 0.4s infinite ease-in-out;
+        }
+
+        .sprinter-leg.right {
+            bottom: 0;
+            right: 5px;
+            animation: legSwing 0.4s infinite ease-in-out reverse;
+        }
+
+        /* 3D Flyer Animation */
+        .flyer-animation {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 200px;
+            height: 150px;
+            animation: floatFlyer 15s infinite ease-in-out;
+        }
+
+        .flyer {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9900, #ff6600);
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+            transform: rotateX(15deg) rotateY(15deg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flyer::before {
+            content: 'DESIGN';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .flyer-2 {
+            position: absolute;
+            top: 60%;
+            left: 80%;
+            width: 180px;
+            height: 120px;
+            animation: floatFlyer2 18s infinite ease-in-out;
+        }
+
+        .flyer-2 .flyer {
+            background: linear-gradient(45deg, #3366ff, #6633ff);
+        }
+
+        .flyer-2 .flyer::before {
+            content: 'CREATIVE';
+        }
+
+        /* Football Game Animation */
+        .football-field {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 200px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .field {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #2e7d32, #4caf50);
+            position: relative;
+        }
+
+        .center-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+        }
+
+        .football {
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            animation: kickBall 8s infinite linear;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .player {
+            position: absolute;
+            width: 15px;
+            height: 30px;
+            background: #ff5722;
+            border-radius: 50% 50% 40% 40%;
+            animation: movePlayer 10s infinite ease-in-out;
+        }
+
+        .player-2 {
+            background: #2196f3;
+            animation-delay: 2s;
+            top: 30%;
+            left: 70%;
+        }
+
+        /* 3D Geometric Shapes */
+        .cube {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 80px;
+            height: 80px;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 153, 0, 0.6);
+            border: 1px solid rgba(255, 153, 0, 0.8);
+        }
+
+        .cube-face:nth-child(1) { transform: translateZ(40px); }
+        .cube-face:nth-child(2) { transform: rotateY(180deg) translateZ(40px); }
+        .cube-face:nth-child(3) { transform: rotateY(90deg) translateZ(40px); }
+        .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(40px); }
+        .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(40px); }
+        .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(40px); }
+
+        .pyramid {
+            position: absolute;
+            bottom: 15%;
+            left: 15%;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid rgba(51, 102, 255, 0.6);
+            animation: rotatePyramid 15s infinite linear;
+        }
+
+        /* Animation Keyframes */
+        @keyframes sprint {
+            0% { transform: translateX(-100px); }
+            50% { transform: translateX(calc(100vw + 100px)); }
+            100% { transform: translateX(-100px); }
+        }
+
+        @keyframes armSwing {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(20deg); }
+        }
+
+        @keyframes legSwing {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        @keyframes floatFlyer {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(10px) rotate(-5deg); }
+            75% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @keyframes floatFlyer2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(15px) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            75% { transform: translateY(20px) rotate(-3deg); }
+        }
+
+        @keyframes kickBall {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(200px, -50px); }
+            50% { transform: translate(100px, 30px); }
+            75% { transform: translate(250px, -30px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes movePlayer {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(100px, 50px); }
+            50% { transform: translate(200px, -30px); }
+            75% { transform: translate(50px, 80px); }
+        }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        @keyframes rotatePyramid {
+            0% { transform: rotateY(0); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--secondary);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .portfolio-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .portfolio-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        .portfolio-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .portfolio-content p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .portfolio-btn a {
+            text-decoration: none;
+            color: var(--white);
+            font-size: 14px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--white);
+        }
+
+        .services-carousel {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        
+        .services-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .services-group {
+            display: flex;
+            min-width: 100%;
+            gap: 20px;
+            padding: 0 10px;
+        }
+        
+        .service-card {
+            flex: 1;
+            background-color: var(--light);
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .service-card:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-10px);
+        }
+        
+        .service-card i {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .service-card:hover i {
+            color: var(--white);
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Jumia-style dots */
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: #ff9900;
+            transform: scale(1.3);
+        }
+        
+        .dot:hover {
+            background: #ff9900;
+            transform: scale(1.2);
+        }
+        
+        /* Jumia-style navigation buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff9900;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btn:hover {
+            background: #e68a00;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .prev {
+            left: 15px;
+        }
+        
+        .next {
+            right: 15px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            left: 25px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: var(--light-gray);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Install Prompt Styles */
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff9900, #e68900);
+            color: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            transform: translateY(150%);
+            transition: transform 0.4s ease;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .install-prompt.show {
+            transform: translateY(0);
+        }
+
+        .install-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .install-icon {
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .install-text {
+            flex: 1;
+        }
+
+        .install-text h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .install-text p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .install-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .install-btn {
+            background: white;
+            color: #ff9900;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Success Message Animation */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .portfolio-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .services-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .service-card {
+                margin: 0;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .prev {
+                left: 10px;
+            }
+            
+            .next {
+                right: 10px;
+            }
+
+            /* Hide some animations on mobile for performance */
+            .flyer-animation,
+            .flyer-2,
+            .cube,
+            .pyramid,
+            .sprinter {
+                display: none;
+            }
+
+            .football-field {
+                width: 200px;
+                height: 150px;
+            }
+
+            .install-prompt {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+            
+            .install-content {
+                gap: 12px;
+            }
+            
+            .install-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .install-text h4 {
+                font-size: 14px;
+            }
+            
+            .install-text p {
+                font-size: 12px;
+            }
+            
+            .install-btn {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo"><i class="fas fa-palette"></i> CyberNinja</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Creative Designs & Animations @CyberMall </h1>
+            <p>Showcasing our passion for design, animation, and creative projects. Let's bring your ideas to life!</p>
+            <a href="#quick-order" class="cta-button">Place Your Order Now</a>
+        </div>
+    </section>
+
+    <!-- Quick Order Section -->
+    <section class="quick-order" id="quick-order">
+        <div class="animation-background">
+            <div class="animation-container">
+                <!-- Sprinter Animation -->
+                <div class="sprinter">
+                    <div class="sprinter-body"></div>
+                    <div class="sprinter-head"></div>
+                    <div class="sprinter-arm left"></div>
+                    <div class="sprinter-arm right"></div>
+                    <div class="sprinter-leg left"></div>
+                    <div class="sprinter-leg right"></div>
+                </div>
+                
+                <!-- 3D Flyer Animations -->
+                <div class="flyer-animation">
+                    <div class="flyer"></div>
+                </div>
+                <div class="flyer-2">
+                    <div class="flyer"></div>
+                </div>
+                
+                <!-- Football Game Animation -->
+                <div class="football-field">
+                    <div class="field">
+                        <div class="center-line"></div>
+                        <div class="center-circle"></div>
+                        <div class="football"></div>
+                        <div class="player"></div>
+                        <div class="player player-2"></div>
+                    </div>
+                </div>
+                
+                <!-- 3D Geometric Shapes -->
+                <div class="cube">
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                </div>
+                
+                <div class="pyramid"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="section-title">
+                <h2>Quick Order Form</h2>
+                <p>Fill out this form to place your order quickly</p>
+            </div>
+            <div class="quick-order-form-container">
+                <div class="quick-order-form">
+                    <form id="quickOrderForm">
+                        <div class="form-group">
+                            <label for="quick-name">Your Name</label>
+                            <input type="text" id="quick-name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-email">Your Email</label>
+                            <input type="email" id="quick-email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-service">Service Interested In</label>
+                            <select id="quick-service" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="graphic-design">Graphic Design</option>
+                                <option value="video-production">Video Production</option>
+                                <option value="animation">3D Animation</option>
+                                <option value="ui-ux">UI/UX Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-message">Project Details</label>
+                            <textarea id="quick-message" class="form-control" placeholder="Describe your project requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Order Request via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Catalog and Work</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="brand ID.webp" alt="Brand Identity Design">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Brand Identity Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="brand-identity-sample.zip">
+                                    <a href="brand ID.webp" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Brand Identity Design</h3>
+                        <p>Complete brand identity package including logo, color palette, and typography.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="3D Animation.jfif" alt="3D Animation">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="3D Animation">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="3d-animation-sample.zip">
+                                    <a href="3D Animation.jfif" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>3D Animation</h3>
+                        <p>Character animation for a promotional video with detailed environments.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="motion graphics.jfif" alt="Motion Graphics">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Motion Graphics">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="motion-graphics-sample.zip">
+                                    <a href="motion graphics.jfif" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Motion Graphics</h3>
+                        <p>Dynamic motion graphics for social media campaigns and advertisements.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="UIUX Design.jfif" alt="UI/UX Design">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="UI/UX Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="ui-ux-sample.zip">
+                                    <a href="UIUX Design.jfif" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>UI/UX Design</h3>
+                        <p>User interface and experience design for mobile and web applications.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="productDesign.jfif" alt="Product Design">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Product Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="product-design-sample.zip">
+                                    <a href="productDesign.jfif" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Product Design</h3>
+                        <p>Innovative product designs with focus on functionality and aesthetics.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="IMG-20251119-WA0001.jpg" alt="Graphics Design">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Graphics Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="video-production-sample.zip">
+                                    <a href="IMG-20251119-WA0001.jpg" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Graphics Designs</h3>
+                        <p>Professional flyers, brochures, Birthday Cards, Success Cards, weeding cards designs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Services</h2>
+            </div>
+            
+            <div class="services-carousel">
+                <button class="nav-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-btn next"><i class="fas fa-chevron-right"></i></button>
+                
+                <div class="services-track">
+                    <div class="services-group">
+                        <div class="service-card fade-in">
+                            <i class="fas fa-paint-brush"></i>
+                            <h3>Graphic Design</h3>
+                            <p>Creative designs for branding, marketing materials, and digital content.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-film"></i>
+                            <h3>Video Production</h3>
+                            <p>Professional flyers, brochures, Birthday Cards, Success Cards ,Logos creation and design</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-cube"></i>
+                            <h3>3D Animation</h3>
+                            <p>High-quality 3D modeling, animation, and visual effects.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="services-group">
+                        <div class="service-card fade-in">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>UI/UX Design</h3>
+                            <p>User-centered design for websites, apps, and digital products.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-code"></i>
+                            <h3>Web Development</h3>
+                            <p>Responsive websites and web applications with modern technologies.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Digital Marketing</h3>
+                            <p>Strategic marketing campaigns to boost your online presence.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="services-group">
+                        <div class="service-card fade-in">
+                            <i class="fas fa-camera"></i>
+                            <h3>Photography</h3>
+                            <p>Professional photography for products, events, and portraits.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-pencil-alt"></i>
+                            <h3>Content Writing</h3>
+                            <p>Engaging and SEO-optimized content for your digital platforms.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Analytics</h3>
+                            <p>Data analysis and insights to drive your business decisions.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dots-container">
+                    <button class="dot active" data-slide="0"></button>
+                    <button class="dot" data-slide="1"></button>
+                    <button class="dot" data-slide="2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h3>Call Me</h3>
+                            <p>+256 779 185 824</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email Me</h3>
+                            <p>paddypride6@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <p>+256 779 185 824</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Available for remote work worldwide</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="graphic-design">Graphic Design</option>
+                                <option value="video-production">Video Production</option>
+                                <option value="animation">3D Animation</option>
+                                <option value="ui-ux">UI/UX Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" class="form-control" placeholder="Describe your project requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Order Request via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PaddyPride</h3>
+                    <p>Creating exceptional designs, animations, and videos that bring ideas to life and captivate audiences.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100076645359313"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://X.com/pride122349"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/paddy.pride" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com/in/PADDY PRIDE" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.github.com/PRIDE0785" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="IMG-20251119-WA0000.jpg">Graphic Design</a></li>
+                        <li><a href="IMG-20251119-WA0001.jpg">Video Production</a></li>
+                        <li><a href="IMG-20251119-WA0000.jpg">3D Animation</a></li>
+                        <li><a href="IMG-20251119-WA0001.jpg">UI/UX Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone-alt"></i> +256 779 185 824</li>
+                        <li><i class="fas fa-envelope"></i> paddypride6@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> +256 779 185 824</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ZuriCyberSpace powered by CyberNinja. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/256779185824?text=Hello!%20I'm%20interested%20in%20your%20services.%20Can%20we%20talk%20about%20a%20project?" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Order Project</h2>
+            <form id="projectOrderForm">
+                <div class="form-group">
+                    <label for="project-name">Project Name</label>
+                    <input type="text" id="project-name" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="customer-name">Your Name</label>
+                    <input type="text" id="customer-name" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-email">Your Email</label>
+                    <input type="email" id="customer-email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-message">Additional Details</label>
+                    <textarea id="customer-message" class="form-control" placeholder="Add any specific requirements or details..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Order via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Install Prompt Notification -->
+    <div id="installPrompt" class="install-prompt">
+        <div class="install-content">
+            <div class="install-icon">
+                <i class="fas fa-download"></i>
+            </div>
+            <div class="install-text">
+                <h4>Install CyberDesign App</h4>
+                <p>Get quick access to our design services</p>
+            </div>
+            <div class="install-actions">
+                <button id="installButton" class="install-btn">Install</button>
+                <button id="closeInstall" class="close-btn">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Quick Order Form Submission to WhatsApp
+        document.getElementById('quickOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('quick-name').value;
+            const email = document.getElementById('quick-email').value;
+            const service = document.getElementById('quick-service').value;
+            const message = document.getElementById('quick-message').value;
+            
+            const whatsappMessage = `Hello! I'm interested in placing an order. Here are my details:%0A%0AName: ${name}%0AEmail: ${email}%0AService: ${service}%0AProject Details: ${message}`;
+            
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            this.reset();
+            alert('Thank you for your order request! You will be redirected to WhatsApp to complete your order.');
+        });
+
+        // Contact Form Submission to WhatsApp
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            const whatsappMessage = `Hello! I'm interested in placing an order. Here are my details:%0A%0AName: ${name}%0AEmail: ${email}%0AService: ${service}%0AProject Details: ${message}`;
+            
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            this.reset();
+            alert('Thank you for your order request! You will be redirected to WhatsApp to complete your order.');
+        });
+
+        // Portfolio Order Buttons
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const projectName = this.getAttribute('data-project');
+                document.getElementById('project-name').value = projectName;
+                document.getElementById('orderModal').style.display = 'flex';
+            });
+        });
+
+        // Project Order Form Submission
+        document.getElementById('projectOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const projectName = document.getElementById('project-name').value;
+            const customerName = document.getElementById('customer-name').value;
+            const customerEmail = document.getElementById('customer-email').value;
+            const customerMessage = document.getElementById('customer-message').value;
+            
+            const whatsappMessage = `Hello! I'm interested in ordering the project: ${projectName}.%0A%0AMy Details:%0AName: ${customerName}%0AEmail: ${customerEmail}%0AAdditional Details: ${customerMessage}`;
+            
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            document.getElementById('orderModal').style.display = 'none';
+            this.reset();
+        });
+
+        // Close Modal
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('orderModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('orderModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Services Carousel Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const servicesTrack = document.querySelector('.services-track');
+            const servicesGroups = document.querySelectorAll('.services-group');
+            const dots = document.querySelectorAll('.services-carousel .dot');
+            const prevBtn = document.querySelector('.services-carousel .prev');
+            const nextBtn = document.querySelector('.services-carousel .next');
+            
+            let currentSlide = 0;
+            let autoScroll;
+            
+            function updateCarousel() {
+                servicesTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % servicesGroups.length;
+                updateCarousel();
+            }
+            
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + servicesGroups.length) % servicesGroups.length;
+                updateCarousel();
+            }
+            
+            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    currentSlide = parseInt(this.getAttribute('data-slide'));
+                    updateCarousel();
+                    resetAutoScroll();
+                });
+            });
+            
+            function startAutoScroll() {
+                autoScroll = setInterval(nextSlide, 4000);
+            }
+            
+            function resetAutoScroll() {
+                clearInterval(autoScroll);
+                startAutoScroll();
+            }
+            
+            const carousel = document.querySelector('.services-carousel');
+            if (carousel) {
+                carousel.addEventListener('mouseenter', () => clearInterval(autoScroll));
+                carousel.addEventListener('mouseleave', startAutoScroll);
+            }
+            
+            startAutoScroll();
+            
+            document.addEventListener('keydown', function(e) {
+                const servicesSection = document.getElementById('services');
+                const rect = servicesSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    if (e.key === 'ArrowLeft') prevSlide();
+                    if (e.key === 'ArrowRight') nextSlide();
+                }
+            });
+        });
+
+        // Scroll Animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Install Prompt Functionality
+        let deferredPrompt;
+        const installPromptElement = document.getElementById('installPrompt');
+        const installButton = document.getElementById('installButton');
+        const closeButton = document.getElementById('closeInstall');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('PWA installable - showing custom prompt');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            setTimeout(() => {
+                if (deferredPrompt && shouldShowPrompt()) {
+                    installPromptElement.classList.add('show');
+                    setTimeout(() => {
+                        if (installPromptElement.classList.contains('show')) {
+                            hideInstallPrompt();
+                        }
+                    }, 15000);
+                }
+            }, 3000);
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            console.log('Installing PWA...');
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response: ${outcome}`);
+            
+            hideInstallPrompt();
+            deferredPrompt = null;
+            
+            if (outcome === 'accepted') {
+                console.log('PWA was installed');
+                showInstallSuccess();
+            }
+        });
+
+        closeButton.addEventListener('click', () => {
+            hideInstallPrompt();
+            localStorage.setItem('installPromptDismissed', Date.now().toString());
+        });
+
+        function hideInstallPrompt() {
+            installPromptElement.classList.remove('show');
+        }
+
+        function showInstallSuccess() {
+            const successMsg = document.createElement('div');
+            successMsg.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #4CAF50;
+                    color: white;
+                    padding: 15px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                ">
+                    <strong>✓ App Installed!</strong><br>
+                    Check your home screen
+                </div>
+            `;
+            document.body.appendChild(successMsg);
+            setTimeout(() => successMsg.remove(), 3000);
+        }
+
+        function shouldShowPrompt() {
+            const lastDismissed = localStorage.getItem('installPromptDismissed');
+            if (!lastDismissed) return true;
+            const oneWeek = 7 * 24 * 60 * 60 * 1000;
+            return (Date.now() - parseInt(lastDismissed)) > oneWeek;
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberspace Design Order and download| Creative Portfolio & Order Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ff9900">
+    <link rel="icon" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <style>
+        :root {
+            --primary: #ff9900;
+            --primary-dark: #e68900;
+            --secondary: #1a1a1a;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #666;
+            --light-gray: #e6e6e6;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            animation: fadeIn 2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Quick Order Section */
+        .quick-order {
+            background-color: var(--secondary);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-order::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .quick-order .section-title {
+            position: relative;
+            z-index: 2;
+        }
+
+        .quick-order .section-title h2,
+        .quick-order .section-title p {
+            color: var(--white);
+        }
+
+        .quick-order-form-container {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quick-order-form {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* 3D Animation Background */
+        .animation-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sprinter Animation */
+        .sprinter {
+            position: absolute;
+            bottom: 15%;
+            left: -100px;
+            width: 80px;
+            height: 120px;
+            animation: sprint 12s infinite linear;
+        }
+
+        .sprinter-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 25px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ff5722, #e64a19);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .sprinter-head {
+            position: absolute;
+            bottom: 60px;
+            left: 5px;
+            width: 15px;
+            height: 15px;
+            background: #ffccbc;
+            border-radius: 50%;
+        }
+
+        .sprinter-arm {
+            position: absolute;
+            width: 8px;
+            height: 35px;
+            background: #ff5722;
+            border-radius: 4px;
+            transform-origin: top center;
+        }
+
+        .sprinter-arm.left {
+            bottom: 45px;
+            left: -5px;
+            animation: armSwing 0.5s infinite ease-in-out;
+        }
+
+        .sprinter-arm.right {
+            bottom: 45px;
+            right: -5px;
+            animation: armSwing 0.5s infinite ease-in-out reverse;
+        }
+
+        .sprinter-leg {
+            position: absolute;
+            width: 10px;
+            height: 45px;
+            background: #d84315;
+            border-radius: 5px;
+            transform-origin: top center;
+        }
+
+        .sprinter-leg.left {
+            bottom: 0;
+            left: 5px;
+            animation: legSwing 0.4s infinite ease-in-out;
+        }
+
+        .sprinter-leg.right {
+            bottom: 0;
+            right: 5px;
+            animation: legSwing 0.4s infinite ease-in-out reverse;
+        }
+
+        /* 3D Flyer Animation */
+        .flyer-animation {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 200px;
+            height: 150px;
+            animation: floatFlyer 15s infinite ease-in-out;
+        }
+
+        .flyer {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9900, #ff6600);
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+            transform: rotateX(15deg) rotateY(15deg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flyer::before {
+            content: 'DESIGN';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .flyer-2 {
+            position: absolute;
+            top: 60%;
+            left: 80%;
+            width: 180px;
+            height: 120px;
+            animation: floatFlyer2 18s infinite ease-in-out;
+        }
+
+        .flyer-2 .flyer {
+            background: linear-gradient(45deg, #3366ff, #6633ff);
+        }
+
+        .flyer-2 .flyer::before {
+            content: 'CREATIVE';
+        }
+
+        /* Football Game Animation */
+        .football-field {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 200px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .field {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #2e7d32, #4caf50);
+            position: relative;
+        }
+
+        .center-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+        }
+
+        .football {
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            animation: kickBall 8s infinite linear;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .player {
+            position: absolute;
+            width: 15px;
+            height: 30px;
+            background: #ff5722;
+            border-radius: 50% 50% 40% 40%;
+            animation: movePlayer 10s infinite ease-in-out;
+        }
+
+        .player-2 {
+            background: #2196f3;
+            animation-delay: 2s;
+            top: 30%;
+            left: 70%;
+        }
+
+        /* 3D Geometric Shapes */
+        .cube {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 80px;
+            height: 80px;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 153, 0, 0.6);
+            border: 1px solid rgba(255, 153, 0, 0.8);
+        }
+
+        .cube-face:nth-child(1) { transform: translateZ(40px); }
+        .cube-face:nth-child(2) { transform: rotateY(180deg) translateZ(40px); }
+        .cube-face:nth-child(3) { transform: rotateY(90deg) translateZ(40px); }
+        .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(40px); }
+        .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(40px); }
+        .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(40px); }
+
+        .pyramid {
+            position: absolute;
+            bottom: 15%;
+            left: 15%;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid rgba(51, 102, 255, 0.6);
+            animation: rotatePyramid 15s infinite linear;
+        }
+
+        /* Animation Keyframes */
+        @keyframes sprint {
+            0% { transform: translateX(-100px); }
+            50% { transform: translateX(calc(100vw + 100px)); }
+            100% { transform: translateX(-100px); }
+        }
+
+        @keyframes armSwing {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(20deg); }
+        }
+
+        @keyframes legSwing {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        @keyframes floatFlyer {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(10px) rotate(-5deg); }
+            75% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @keyframes floatFlyer2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(15px) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            75% { transform: translateY(20px) rotate(-3deg); }
+        }
+
+        @keyframes kickBall {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(200px, -50px); }
+            50% { transform: translate(100px, 30px); }
+            75% { transform: translate(250px, -30px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes movePlayer {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(100px, 50px); }
+            50% { transform: translate(200px, -30px); }
+            75% { transform: translate(50px, 80px); }
+        }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        @keyframes rotatePyramid {
+            0% { transform: rotateY(0); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--secondary);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .portfolio-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .portfolio-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        .portfolio-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .portfolio-content p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .portfolio-btn a {
+            text-decoration: none;
+            color: var(--white);
+            font-size: 14px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--white);
+        }
+
+        .services-carousel {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        
+        .services-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .services-group {
+            display: flex;
+            min-width: 100%;
+            gap: 20px;
+            padding: 0 10px;
+        }
+        
+        .service-card {
+            flex: 1;
+            background-color: var(--light);
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .service-card:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-10px);
+        }
+        
+        .service-card i {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .service-card:hover i {
+            color: var(--white);
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Jumia-style dots */
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: #ff9900;
+            transform: scale(1.3);
+        }
+        
+        .dot:hover {
+            background: #ff9900;
+            transform: scale(1.2);
+        }
+        
+        /* Jumia-style navigation buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff9900;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btn:hover {
+            background: #e68a00;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .prev {
+            left: 15px;
+        }
+        
+        .next {
+            right: 15px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            left: 25px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: var(--light-gray);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Install Prompt Styles */
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff9900, #e68900);
+            color: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            transform: translateY(150%);
+            transition: transform 0.4s ease;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .install-prompt.show {
+            transform: translateY(0);
+        }
+
+        .install-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .install-icon {
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .install-text {
+            flex: 1;
+        }
+
+        .install-text h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .install-text p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .install-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .install-btn {
+            background: white;
+            color: #ff9900;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Success Message Animation */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .portfolio-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .services-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .service-card {
+                margin: 0;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .prev {
+                left: 10px;
+            }
+            
+            .next {
+                right: 10px;
+            }
+
+            /* Hide some animations on mobile for performance */
+            .flyer-animation,
+            .flyer-2,
+            .cube,
+            .pyramid,
+            .sprinter {
+                display: none;
+            }
+
+            .football-field {
+                width: 200px;
+                height: 150px;
+            }
+
+            .install-prompt {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+            
+            .install-content {
+                gap: 12px;
+            }
+            
+            .install-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .install-text h4 {
+                font-size: 14px;
+            }
+            
+            .install-text p {
+                font-size: 12px;
+            }
+            
+            .install-btn {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo"><i class="fas fa-palette"></i> CyberNinja</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Creative Designs & Animations @CyberMall </h1>
+            <p>Showcasing our passion for design, animation, and creative projects. Let's bring your ideas to life!</p>
+            <a href="#quick-order" class="cta-button">Place Your Order Now</a>
+        </div>
+    </section>
+
+    <!-- Quick Order Section -->
+    <section class="quick-order" id="quick-order">
+        <div class="animation-background">
+            <div class="animation-container">
+                <!-- Sprinter Animation -->
+                <div class="sprinter">
+                    <div class="sprinter-body"></div>
+                    <div class="sprinter-head"></div>
+                    <div class="sprinter-arm left"></div>
+                    <div class="sprinter-arm right"></div>
+                    <div class="sprinter-leg left"></div>
+                    <div class="sprinter-leg right"></div>
+                </div>
+                
+                <!-- 3D Flyer Animations -->
+                <div class="flyer-animation">
+                    <div class="flyer"></div>
+                </div>
+                <div class="flyer-2">
+                    <div class="flyer"></div>
+                </div>
+                
+                <!-- Football Game Animation -->
+                <div class="football-field">
+                    <div class="field">
+                        <div class="center-line"></div>
+                        <div class="center-circle"></div>
+                        <div class="football"></div>
+                        <div class="player"></div>
+                        <div class="player player-2"></div>
+                    </div>
+                </div>
+                
+                <!-- 3D Geometric Shapes -->
+                <div class="cube">
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                    <div class="cube-face"></div>
+                </div>
+                
+                <div class="pyramid"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="section-title">
+                <h2>Quick Order Form</h2>
+                <p>Fill out this form to place your order quickly</p>
+            </div>
+            <div class="quick-order-form-container">
+                <div class="quick-order-form">
+                    <form id="quickOrderForm">
+                        <div class="form-group">
+                            <label for="quick-name">Your Name</label>
+                            <input type="text" id="quick-name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-email">Your Email</label>
+                            <input type="email" id="quick-email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-service">Service Interested In</label>
+                            <select id="quick-service" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="graphic-design">Graphic Design</option>
+                                <option value="video-production">Video Production</option>
+                                <option value="animation">3D Animation</option>
+                                <option value="ui-ux">UI/UX Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-message">Project Details</label>
+                            <textarea id="quick-message" class="form-control" placeholder="Describe your project requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Order Request via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Catalog and Work</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="brand ID.webp" alt="Brand Identity Design">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Brand Identity Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="brand-identity-sample.zip">
+                                    <a href="brand ID.webp" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Brand Identity Design</h3>
+                        <p>Complete brand identity package including logo, color palette, and typography.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="3D Animation.jfif" alt="3D Animation">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="3D Animation">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="3d-animation-sample.zip">
+                                    <a href="3D Animation.jfif" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>3D Animation</h3>
+                        <p>Character animation for a promotional video with detailed environments.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="motion graphics.jfif" alt="Motion Graphics">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Motion Graphics">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="motion-graphics-sample.zip">
+                                    <a href="motion graphics.jfif" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Motion Graphics</h3>
+                        <p>Dynamic motion graphics for social media campaigns and advertisements.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="UIUX Design.jfif" alt="UI/UX Design">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="UI/UX Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="ui-ux-sample.zip">
+                                    <a href="UIUX Design.jfif" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>UI/UX Design</h3>
+                        <p>User interface and experience design for mobile and web applications.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="productDesign.jfif" alt="Product Design">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Product Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="product-design-sample.zip">
+                                    <a href="productDesign.jfif" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Product Design</h3>
+                        <p>Innovative product designs with focus on functionality and aesthetics.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-img">
+                        <img src="IMG-20251119-WA0001.jpg" alt="Graphics Design">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-actions">
+                                <button class="portfolio-btn order-btn" data-project="Graphics Design">
+                                    <i class="fas fa-shopping-cart"></i> Order
+                                </button>
+                                <button class="portfolio-btn download-btn" data-file="video-production-sample.zip">
+                                    <a href="IMG-20251119-WA0001.jpg" download><i class="fas fa-download"></i> Download Sample</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Graphics Designs</h3>
+                        <p>Professional flyers, brochures, Birthday Cards, Success Cards, weeding cards designs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Services</h2>
+            </div>
+            
+            <div class="services-carousel">
+                <button class="nav-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-btn next"><i class="fas fa-chevron-right"></i></button>
+                
+                <div class="services-track">
+                    <div class="services-group">
+                        <div class="service-card fade-in">
+                            <i class="fas fa-paint-brush"></i>
+                            <h3>Graphic Design</h3>
+                            <p>Creative designs for branding, marketing materials, and digital content.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-film"></i>
+                            <h3>Video Production</h3>
+                            <p>Professional flyers, brochures, Birthday Cards, Success Cards ,Logos creation and design</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-cube"></i>
+                            <h3>3D Animation</h3>
+                            <p>High-quality 3D modeling, animation, and visual effects.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="services-group">
+                        <div class="service-card fade-in">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>UI/UX Design</h3>
+                            <p>User-centered design for websites, apps, and digital products.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-code"></i>
+                            <h3>Web Development</h3>
+                            <p>Responsive websites and web applications with modern technologies.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Digital Marketing</h3>
+                            <p>Strategic marketing campaigns to boost your online presence.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="services-group">
+                        <div class="service-card fade-in">
+                            <i class="fas fa-camera"></i>
+                            <h3>Photography</h3>
+                            <p>Professional photography for products, events, and portraits.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-pencil-alt"></i>
+                            <h3>Content Writing</h3>
+                            <p>Engaging and SEO-optimized content for your digital platforms.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Analytics</h3>
+                            <p>Data analysis and insights to drive your business decisions.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dots-container">
+                    <button class="dot active" data-slide="0"></button>
+                    <button class="dot" data-slide="1"></button>
+                    <button class="dot" data-slide="2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h3>Call Me</h3>
+                            <p>+256 779 185 824</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email Me</h3>
+                            <p>paddypride6@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <p>+256 779 185 824</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Available for remote work worldwide</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="graphic-design">Graphic Design</option>
+                                <option value="video-production">Video Production</option>
+                                <option value="animation">3D Animation</option>
+                                <option value="ui-ux">UI/UX Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" class="form-control" placeholder="Describe your project requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Order Request via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PaddyPride</h3>
+                    <p>Creating exceptional designs, animations, and videos that bring ideas to life and captivate audiences.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100076645359313"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://X.com/pride122349"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/paddy.pride" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com/in/PADDY PRIDE" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.github.com/PRIDE0785" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="IMG-20251119-WA0000.jpg">Graphic Design</a></li>
+                        <li><a href="IMG-20251119-WA0001.jpg">Video Production</a></li>
+                        <li><a href="IMG-20251119-WA0000.jpg">3D Animation</a></li>
+                        <li><a href="IMG-20251119-WA0001.jpg">UI/UX Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone-alt"></i> +256 779 185 824</li>
+                        <li><i class="fas fa-envelope"></i> paddypride6@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> +256 779 185 824</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ZuriCyberSpace powered by CyberNinja. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/256779185824?text=Hello!%20I'm%20interested%20in%20your%20services.%20Can%20we%20talk%20about%20a%20project?" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Order Project</h2>
+            <form id="projectOrderForm">
+                <div class="form-group">
+                    <label for="project-name">Project Name</label>
+                    <input type="text" id="project-name" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="customer-name">Your Name</label>
+                    <input type="text" id="customer-name" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-email">Your Email</label>
+                    <input type="email" id="customer-email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-message">Additional Details</label>
+                    <textarea id="customer-message" class="form-control" placeholder="Add any specific requirements or details..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Order via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Install Prompt Notification -->
+    <div id="installPrompt" class="install-prompt">
+        <div class="install-content">
+            <div class="install-icon">
+                <i class="fas fa-download"></i>
+            </div>
+            <div class="install-text">
+                <h4>Install CyberDesign App</h4>
+                <p>Get quick access to our design services</p>
+            </div>
+            <div class="install-actions">
+                <button id="installButton" class="install-btn">Install</button>
+                <button id="closeInstall" class="close-btn">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Quick Order Form Submission to WhatsApp
+        document.getElementById('quickOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('quick-name').value;
+            const email = document.getElementById('quick-email').value;
+            const service = document.getElementById('quick-service').value;
+            const message = document.getElementById('quick-message').value;
+            
+            const whatsappMessage = `Hello! I'm interested in placing an order. Here are my details:%0A%0AName: ${name}%0AEmail: ${email}%0AService: ${service}%0AProject Details: ${message}`;
+            
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            this.reset();
+            alert('Thank you for your order request! You will be redirected to WhatsApp to complete your order.');
+        });
+
+        // Contact Form Submission to WhatsApp
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            const whatsappMessage = `Hello! I'm interested in placing an order. Here are my details:%0A%0AName: ${name}%0AEmail: ${email}%0AService: ${service}%0AProject Details: ${message}`;
+            
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            this.reset();
+            alert('Thank you for your order request! You will be redirected to WhatsApp to complete your order.');
+        });
+
+        // Portfolio Order Buttons
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const projectName = this.getAttribute('data-project');
+                document.getElementById('project-name').value = projectName;
+                document.getElementById('orderModal').style.display = 'flex';
+            });
+        });
+
+        // Project Order Form Submission
+        document.getElementById('projectOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const projectName = document.getElementById('project-name').value;
+            const customerName = document.getElementById('customer-name').value;
+            const customerEmail = document.getElementById('customer-email').value;
+            const customerMessage = document.getElementById('customer-message').value;
+            
+            const whatsappMessage = `Hello! I'm interested in ordering the project: ${projectName}.%0A%0AMy Details:%0AName: ${customerName}%0AEmail: ${customerEmail}%0AAdditional Details: ${customerMessage}`;
+            
+            window.open(`https://wa.me/256779185824?text=${whatsappMessage}`, '_blank');
+            document.getElementById('orderModal').style.display = 'none';
+            this.reset();
+        });
+
+        // Close Modal
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('orderModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('orderModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Services Carousel Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const servicesTrack = document.querySelector('.services-track');
+            const servicesGroups = document.querySelectorAll('.services-group');
+            const dots = document.querySelectorAll('.services-carousel .dot');
+            const prevBtn = document.querySelector('.services-carousel .prev');
+            const nextBtn = document.querySelector('.services-carousel .next');
+            
+            let currentSlide = 0;
+            let autoScroll;
+            
+            function updateCarousel() {
+                servicesTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % servicesGroups.length;
+                updateCarousel();
+            }
+            
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + servicesGroups.length) % servicesGroups.length;
+                updateCarousel();
+            }
+            
+            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    currentSlide = parseInt(this.getAttribute('data-slide'));
+                    updateCarousel();
+                    resetAutoScroll();
+                });
+            });
+            
+            function startAutoScroll() {
+                autoScroll = setInterval(nextSlide, 4000);
+            }
+            
+            function resetAutoScroll() {
+                clearInterval(autoScroll);
+                startAutoScroll();
+            }
+            
+            const carousel = document.querySelector('.services-carousel');
+            if (carousel) {
+                carousel.addEventListener('mouseenter', () => clearInterval(autoScroll));
+                carousel.addEventListener('mouseleave', startAutoScroll);
+            }
+            
+            startAutoScroll();
+            
+            document.addEventListener('keydown', function(e) {
+                const servicesSection = document.getElementById('services');
+                const rect = servicesSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    if (e.key === 'ArrowLeft') prevSlide();
+                    if (e.key === 'ArrowRight') nextSlide();
+                }
+            });
+        });
+
+        // Scroll Animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Install Prompt Functionality
+        let deferredPrompt;
+        const installPromptElement = document.getElementById('installPrompt');
+        const installButton = document.getElementById('installButton');
+        const closeButton = document.getElementById('closeInstall');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('PWA installable - showing custom prompt');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            setTimeout(() => {
+                if (deferredPrompt && shouldShowPrompt()) {
+                    installPromptElement.classList.add('show');
+                    setTimeout(() => {
+                        if (installPromptElement.classList.contains('show')) {
+                            hideInstallPrompt();
+                        }
+                    }, 15000);
+                }
+            }, 3000);
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            console.log('Installing PWA...');
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response: ${outcome}`);
+            
+            hideInstallPrompt();
+            deferredPrompt = null;
+            
+            if (outcome === 'accepted') {
+                console.log('PWA was installed');
+                showInstallSuccess();
+            }
+        });
+
+        closeButton.addEventListener('click', () => {
+            hideInstallPrompt();
+            localStorage.setItem('installPromptDismissed', Date.now().toString());
+        });
+
+        function hideInstallPrompt() {
+            installPromptElement.classList.remove('show');
+        }
+
+        function showInstallSuccess() {
+            const successMsg = document.createElement('div');
+            successMsg.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #4CAF50;
+                    color: white;
+                    padding: 15px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                ">
+                    <strong>✓ App Installed!</strong><br>
+                    Check your home screen
+                </div>
+            `;
+            document.body.appendChild(successMsg);
+            setTimeout(() => successMsg.remove(), 3000);
+        }
+
+        function shouldShowPrompt() {
+            const lastDismissed = localStorage.getItem('installPromptDismissed');
+            if (!lastDismissed) return true;
+            const oneWeek = 7 * 24 * 60 * 60 * 1000;
+            return (Date.now() - parseInt(lastDismissed)) > oneWeek;
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
